@@ -2,21 +2,21 @@ export const projectLinks = [
   {
     id: 1,
     title: "Home",
-    link: "#",
+    link: "/home",
   },
   {
     id: 2,
     title: "Animes",
-    link: "#",
+    link: "/animes",
   },
   {
     id: 3,
     title: "Fórum",
-    link: "#",
+    link: "/forum",
   },
   {
     id: 4,
     title: "Comunidade",
-    link: "#",
+    link: "/comunidade",
   },
 ];
