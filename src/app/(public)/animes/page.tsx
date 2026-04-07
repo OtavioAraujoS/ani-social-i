@@ -7,10 +7,10 @@ export default function AnimesHomePage() {
   const leftContent = (
     <>
       <div className="space-y-2">
-        <h1 className="text-5xl font-black uppercase leading-[0.9] tracking-tighter text-slate-900 dark:text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] lg:text-6xl xl:text-7xl">
-          ACERVO DE
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-slate-900 dark:text-[#00F0FF] leading-none md:leading-[0.9] uppercase tracking-tighter italic">
+          CATÁLOGO
           <br />
-          ANIMES
+          DE ANIMES
         </h1>
         <div className="flex items-center gap-3 pt-2">
           <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#0080FF] dark:text-[#00F0FF] dark:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]">

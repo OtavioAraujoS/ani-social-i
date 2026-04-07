@@ -1,25 +1,30 @@
 import { FeatureCard } from "@/components/FeatureCard";
-import { projectFeatures } from "@/utils/projectFunctions";
 import Image from "next/image";
 import { ThreeColumnLayout } from "@/components/ThreeColumnLayout";
+import { LineChart, Handshake, Globe } from "lucide-react";
+import { forumFeatures } from "@/utils/projectFunctions";
 
-export default function Home() {
+export default function ForumHomePage() {
   const leftContent = (
     <>
-      <div className="space-y-1 md:space-y-2">
-        <div className="text-slate-500 dark:text-[#00F0FF] text-[9px] md:text-[10px] font-mono tracking-[0.4em] md:tracking-[0.5em] uppercase font-bold dark:font-normal opacity-80 dark:opacity-70">
-          NEURAL LINK // ANI SOCIAL
-        </div>
+      <div className="space-y-2">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-slate-900 dark:text-[#00F0FF] leading-none md:leading-[0.9] uppercase tracking-tighter italic">
-          Hub
+          COLISÃO DE
           <br />
-          Social de Animes
+          IDEIAS
         </h1>
+        <div className="flex items-center gap-3 pt-2">
+          <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#0080FF] dark:text-[#00F0FF] dark:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]">
+            DISCOURSE PROTOCOL // ANI SOCIAL
+          </div>
+        </div>
+        <div className="h-0.5 w-full max-w-50 mt-2 bg-linear-to-r from-[#0080FF] dark:from-[#00F0FF] to-transparent opacity-60"></div>
       </div>
 
-      <p className="text-sm md:text-base lg:text-lg text-slate-700 dark:text-white/50 leading-relaxed font-medium dark:font-light max-w-xl mx-auto lg:mx-0">
-        Acesse o repositório central da cultura otaku. Sincronize metadados,
-        forje conexões na rede e domine o fluxo de informações do ecossistema.
+      <p className="max-w-md text-sm font-medium leading-relaxed text-slate-700 dark:text-white/60">
+        Onde as discussões ganham vida e as ideias se conectam. O epicentro da
+        comunidade Otaku. Um espaço vibrante onde fãs se reúnem para celebrar
+        sua paixão compartilhada por animes.
       </p>
     </>
   );
@@ -33,12 +38,11 @@ export default function Home() {
 
       <div className="relative z-10 w-full max-w-[70vw] sm:max-w-60 md:max-w-80 lg:max-w-100 xl:max-w-120 drop-shadow-[0_20px_40px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_30px_60px_rgba(0,0,0,0.8)]">
         <Image
-          src="/animeGirlOne.png"
-          alt="Anime Protocol Interface"
-          className="w-full h-auto max-h-[60vh] md:max-h-none object-contain mask-image-linear-to-b from-black via-black to-transparent"
+          src="/animeGirlThree.png"
+          alt="Cyber-Lofi Forum"
           width={1100}
           height={1100}
-          quality={100}
+          className="w-full h-auto max-h-[60vh] md:max-h-none object-contain mask-image-linear-to-b from-black via-black to-transparent"
           priority
           unoptimized
         />
@@ -48,12 +52,12 @@ export default function Home() {
 
   const rightContent = (
     <>
-      {projectFeatures.map((item) => (
+      {forumFeatures.map((feature) => (
         <FeatureCard
-          key={item.id}
-          icon={item.icon}
-          title={item.title}
-          description={item.description}
+          key={feature.id}
+          icon={feature.icon}
+          title={feature.title}
+          description={feature.description}
         />
       ))}
     </>

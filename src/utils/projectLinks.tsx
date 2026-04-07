@@ -14,9 +14,4 @@ export const projectLinks = [
     title: "Fórum",
     link: "/forum",
   },
-  {
-    id: 4,
-    title: "Comunidade",
-    link: "/comunidade",
-  },
 ];

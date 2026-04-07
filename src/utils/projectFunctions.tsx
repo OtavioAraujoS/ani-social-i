@@ -5,7 +5,31 @@ import {
   Search,
   RefreshCw,
   BarChart2,
+  LineChart,
+  Handshake,
+  Globe,
 } from "lucide-react";
+
+export const forumFeatures = [
+  {
+    id: 1,
+    icon: <LineChart size={24} strokeWidth={1.5} />,
+    title: "TÓPICOS EM DESTAQUE",
+    description: "Descubra tópicos recentes e discussões ativas.",
+  },
+  {
+    id: 2,
+    icon: <Handshake size={24} strokeWidth={1.5} />,
+    title: "PARTICIPE DE ENQUETES",
+    description: "Participe de enquetes e decisões da comunidade.",
+  },
+  {
+    id: 3,
+    icon: <Globe size={24} strokeWidth={1.5} />,
+    title: "DEBATES GLOBAIS",
+    description: "Participe de discussões internacionais sobre animes.",
+  },
+];
 
 export const animesFeatures = [
   {
@@ -28,7 +52,7 @@ export const animesFeatures = [
   },
 ];
 
-export const projectFunctions = [
+export const projectFeatures = [
   {
     id: 1,
     icon: <Database className="w-6 h-6" />,
