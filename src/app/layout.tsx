@@ -22,16 +22,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} antialiased`}
+      className={`${inter.variable} antialiased overflow-x-hidden`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-transparent relative overflow-x-hidden">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
+          <div className="fixed top-0 left-0 w-full h-full -z-50 bg-[url('/bgWhite.png')] dark:bg-[url('/bgDark.png')] bg-cover bg-center bg-no-repeat" />
           <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>
       </body>
