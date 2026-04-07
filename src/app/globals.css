@@ -44,6 +44,8 @@
 
   --secondary-container: #e2dfde;
   --outline-variant: #c4c5d6;
+
+  --bg-image: url("/bgWhite.png");
 }
 
 .dark {
@@ -66,6 +68,8 @@
 
   --accent-gold: #d4af37;
   --accent-cyan: #00f0ff;
+
+  --bg-image: url("/bgDark.png");
 }
 
 @keyframes spin-glow {
@@ -118,8 +122,22 @@
   opacity: 0.5;
 }
 
+html,
 body {
-  background: var(--surface);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-image: var(--bg-image);
+  background-color: var(--surface);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+
   color: var(--on-surface);
   font-family: var(--font-sans);
 }

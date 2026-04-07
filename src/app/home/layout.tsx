@@ -16,7 +16,7 @@ export default function HomeLayout({
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex-1 w-full flex flex-col overflow-x-hidden bg-[url('/bgWhite.png')] dark:bg-[url('/bgDark.png')] bg-cover bg-center bg-no-repeat bg-fixed text-slate-900 dark:text-white relative font-sans selection:bg-[#00F0FF]/30 transition-colors duration-300">
+    <div className="flex-1 w-full overflow-x-hidden flex flex-col text-slate-900 dark:text-white relative font-sans selection:bg-[#00F0FF]/30 transition-colors duration-300">
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,240,255,0.04)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(0,240,255,0.08)_0%,transparent_70%)] pointer-events-none" />
 
       <header className="relative z-50 w-full px-6 sm:px-12 py-6 md:py-5 flex flex-col md:flex-row justify-between items-center bg-white/60 dark:bg-[#0A0E14]/40 backdrop-blur-md gap-6 md:gap-0">
