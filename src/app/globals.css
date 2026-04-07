@@ -93,8 +93,12 @@
   }
 }
 
-.animate-spin-glow {
-  animation: spin-glow 20s linear infinite;
+.animate-spin-glow-slow {
+  animation: spin-glow 30s linear infinite;
+}
+
+.animate-spin-glow-reverse {
+  animation: spin-glow 20s linear infinite reverse;
 }
 
 .animate-kintsugi {
