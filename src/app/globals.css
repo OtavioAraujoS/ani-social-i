@@ -9,17 +9,17 @@
   --color-surface-container-low: var(--surface-container-low);
   --color-surface-container: var(--surface-container);
   --color-surface-container-highest: var(--surface-container-highest);
-  
+
   --color-primary: var(--primary);
   --color-primary-container: var(--primary-container);
   --color-primary-fixed: var(--primary-fixed);
   --color-on-primary-container: var(--on-primary-container);
-  
+
   --color-surface-tint: var(--surface-tint);
   --color-on-surface: var(--on-surface);
-  
+
   --color-secondary-container: var(--secondary-container);
-  
+
   --color-outline-variant: var(--outline-variant);
 
   --font-sans: var(--font-inter), Arial, Helvetica, sans-serif;
@@ -61,19 +61,30 @@
 
   --secondary-container: #1a1e26;
   --outline-variant: #2d343f;
-  
+
   --accent-gold: #d4af37;
   --accent-cyan: #00f0ff;
 }
 
 @keyframes spin-glow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes kintsugi-pulse {
-  0%, 100% { opacity: 0.3; filter: blur(2px); }
-  50% { opacity: 0.6; filter: blur(4px); }
+  0%,
+  100% {
+    opacity: 0.3;
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.6;
+    filter: blur(4px);
+  }
 }
 
 .animate-spin-glow {
@@ -85,14 +96,19 @@
 }
 
 .kintsugi-vein {
-  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-gold),
+    transparent
+  );
   height: 1px;
   width: 100%;
   position: relative;
 }
 
 .kintsugi-vein::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: var(--accent-gold);
