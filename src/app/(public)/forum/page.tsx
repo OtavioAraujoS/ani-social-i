@@ -1,7 +1,6 @@
 import { FeatureCard } from "@/components/FeatureCard";
 import Image from "next/image";
 import { ThreeColumnLayout } from "@/components/ThreeColumnLayout";
-import { LineChart, Handshake, Globe } from "lucide-react";
 import { forumFeatures } from "@/utils/projectFunctions";
 
 export default function ForumHomePage() {
