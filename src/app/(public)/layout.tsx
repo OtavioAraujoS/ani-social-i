@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "next-themes";
+import { useThemeHook } from "@/hooks/useThemeHook";
 import { Button } from "@/components/ui/button";
 import { projectLinks } from "@/utils/projectLinks";
 import Link from "next/link";
@@ -13,7 +13,7 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   const { isAuthenticated, logout } = useAuth();
-  const { theme, setTheme } = useTheme();
+  const { toggleTheme } = useThemeHook();
 
   return (
     <div className="h-screen w-full flex flex-col text-slate-900 dark:text-white relative font-sans selection:bg-[#00F0FF]/30 overflow-hidden">
@@ -47,7 +47,7 @@ export default function HomeLayout({
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={toggleTheme}
               className="rounded-full bg-transparent border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white/70 hover:bg-slate-100 dark:hover:bg-white/5"
             >
               <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
