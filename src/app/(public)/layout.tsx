@@ -4,7 +4,6 @@ import { useThemeHook } from "@/hooks/useThemeHook";
 import { Button } from "@/components/ui/button";
 import { projectLinks } from "@/utils/projectLinks";
 import Link from "next/link";
-import { useAuth } from "@/providers/AuthProvider";
 import { Moon, Sun } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -14,7 +13,6 @@ export default function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated, logout } = useAuth();
   const { toggleTheme } = useThemeHook();
   const pathname = usePathname();
 
@@ -68,27 +66,16 @@ export default function HomeLayout({
               <span className="sr-only">Mudar tema</span>
             </Button>
 
-            {isAuthenticated ? (
+            <Link href="/login">
               <Button
-                onClick={logout}
+                asChild
                 className="cursor-pointer rounded-full px-6 py-2 transition-all backdrop-blur-md uppercase text-[10px] font-bold tracking-wider
-                bg-red-50 border-red-200 text-red-600 hover:bg-red-100 border
-                dark:bg-[#FF4E4E]/5 dark:border-[#FF4E4E]/40 dark:text-[#FF4E4E] dark:hover:bg-[#FF4E4E]/15 dark:hover:shadow-[0_0_15px_rgba(255,78,78,0.2)]"
-              >
-                Logout
-              </Button>
-            ) : (
-              <Link href="/login">
-                <Button
-                  asChild
-                  className="cursor-pointer rounded-full px-6 py-2 transition-all backdrop-blur-md uppercase text-[10px] font-bold tracking-wider
                   bg-[#2051CE] border-transparent text-white hover:bg-[#1a44ae] shadow-lg shadow-blue-500/20 border
                   dark:bg-[#00F0FF]/5 dark:border-[#00F0FF]/40 dark:text-[#00F0FF] dark:hover:bg-[#00F0FF]/15 dark:shadow-none dark:hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]"
-                >
-                  <span>Login / Registrar</span>
-                </Button>
-              </Link>
-            )}
+              >
+                <span>Login / Registrar</span>
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
