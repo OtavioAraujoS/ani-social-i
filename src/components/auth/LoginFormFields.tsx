@@ -85,7 +85,7 @@ export function LoginFormFields({
           className="w-full bg-[#2051ce] text-[#ffffff] font-black text-sm uppercase tracking-widest py-5 rounded-none shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] hover:bg-[#416be8] active:scale-95 transition-all duration-200 disabled:opacity-50"
           type="submit"
         >
-          {isSubmitting ? "Authenticating..." : "Sign In"}
+          {isSubmitting ? "Autenticando..." : "Entrar"}
         </button>
       </div>
 

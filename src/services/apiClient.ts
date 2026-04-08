@@ -4,6 +4,25 @@ export const apiClient = new Api({
   baseUrl: process.env.NEXT_PUBLIC_API_URL || "",
 });
 
+async function parseResponse<T>(response: Response): Promise<T> {
+  return response.json() as Promise<T>;
+}
+
+export interface LoginResponse {
+  message: string;
+  token: string;
+}
+
+export const authService = {
+  login: async (credentials: {
+    userName: string;
+    password: string;
+  }): Promise<LoginResponse> => {
+    const response = await apiClient.api.postApiAuthLogin(credentials);
+    return parseResponse<LoginResponse>(response);
+  },
+};
+
 export class ApiError extends Error {
   constructor(
     public readonly status: number,

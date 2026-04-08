@@ -29,7 +29,7 @@ export function proxy(request: NextRequest) {
   }
 
   if (token && isAuthRoute) {
-    return NextResponse.redirect(new URL("/home", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   return NextResponse.next();

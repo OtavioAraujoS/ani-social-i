@@ -72,7 +72,7 @@ export default function HomeLayout({
                   bg-[#2051CE] border-transparent text-white hover:bg-[#1a44ae] shadow-lg shadow-blue-500/20 border
                   dark:bg-[#00F0FF]/5 dark:border-[#00F0FF]/40 dark:text-[#00F0FF] dark:hover:bg-[#00F0FF]/15 dark:shadow-none dark:hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]"
                 >
-                  <span>Join the Hub / Login</span>
+                  <span>Login / Registrar</span>
                 </Button>
               </Link>
             )}

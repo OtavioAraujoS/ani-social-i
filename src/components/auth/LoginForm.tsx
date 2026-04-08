@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useAuth } from "@/providers/AuthProvider";
+import { useAuthStore } from "@/stores/authStore";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { apiClient, getApiError } from "@/services/apiClient";
+import { authService, getApiError } from "@/services/apiClient";
 import { LoginFormFields } from "./LoginFormFields";
+import { useRouter } from "next/navigation";
 
 const loginSchema = z.object({
   username: z
@@ -19,7 +20,8 @@ type LoginSchema = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
   const [authError, setAuthError] = useState<string | null>(null);
-  const { login } = useAuth();
+  const login = useAuthStore((s) => s.login);
+  const router = useRouter();
 
   const {
     register,
@@ -32,23 +34,12 @@ export function LoginForm() {
   const onSubmit = async (data: LoginSchema) => {
     setAuthError(null);
     try {
-      const response = await apiClient.api.postApiAuthLogin({
+      const { token } = await authService.login({
         userName: data.username,
         password: data.password,
       });
-
-      if (!response.ok) {
-        throw new Error("Credenciais inválidas");
-      }
-
-      const responseData = response.data as unknown as Record<string, unknown>;
-      const token = responseData?.token as string | undefined;
-
-      if (!token) {
-        throw new Error("Token não retornado pela API");
-      }
-
-      login({ name: data.username, email: "otavio@gemini.ai" }, token);
+      login(token);
+      router.replace("/dashboard");
     } catch (err: unknown) {
       const apiError = getApiError(err);
       setAuthError(apiError.message);
