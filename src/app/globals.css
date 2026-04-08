@@ -142,6 +142,7 @@ body {
 }
 
 body {
+  background-image: none;
   background-color: var(--surface);
   background-size: cover;
   background-position: center;
