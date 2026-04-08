@@ -8,6 +8,7 @@ import * as z from "zod";
 import { authService, getApiError } from "@/services/apiClient";
 import { LoginFormFields } from "./LoginFormFields";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const loginSchema = z.object({
   username: z
@@ -76,9 +77,12 @@ export function LoginForm() {
         <footer className="mt-12 text-center">
           <p className="text-[10px] tracking-[0.15em] uppercase text-[#747685]">
             Registre-se{" "}
-            <a className="text-[#416be8] font-black hover:underline" href="#">
+            <Link
+              className="text-[#416be8] font-black hover:underline"
+              href="/register"
+            >
               clicando aqui
-            </a>
+            </Link>
           </p>
         </footer>
       </div>
