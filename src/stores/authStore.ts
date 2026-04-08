@@ -76,7 +76,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         try {
           const payload = decodeJwt(token);
           if (isTokenExpired(payload)) {
-            get().logout(); // also clears cookie
+            get().logout();
           }
         } catch {
           get().logout();
