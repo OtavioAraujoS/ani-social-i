@@ -126,6 +126,14 @@
   opacity: 0.5;
 }
 
+.bg-wallpaper {
+  background-image: var(--bg-image) !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 html,
 body {
   margin: 0;
@@ -134,12 +142,11 @@ body {
 }
 
 body {
-  background-image: var(--bg-image);
+  background-image: none;
   background-color: var(--surface);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   background-attachment: fixed;
 
   color: var(--on-surface);

@@ -1,17 +1,9 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-const PUBLIC_ROUTES = [
-  "/home",
-  "/login",
-  "/register",
-  "/app/home",
-  "/animes",
-  "/forum",
-  "/comunidade",
-];
+const PUBLIC_ROUTES = ["/home", "/login", "/register", "/animes", "/forum"];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { nextUrl, cookies } = request;
 
   const token = cookies.get("ani-social-token")?.value;
@@ -29,7 +21,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (token && isAuthRoute) {
-    return NextResponse.redirect(new URL("/home", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   return NextResponse.next();

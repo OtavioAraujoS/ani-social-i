@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/providers/AuthProvider";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,7 +32,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="fixed top-0 left-0 w-full h-full -z-50 bg-[url('/bgWhite.png')] dark:bg-[url('/bgDark.png')] bg-cover bg-center bg-no-repeat" />
           <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>
       </body>
