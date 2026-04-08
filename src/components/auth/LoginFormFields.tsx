@@ -36,7 +36,7 @@ export function LoginFormFields({
           <input
             className="w-full bg-[#333536]/10 border-0 focus:ring-2 focus:ring-[#2051ce] text-[#f8f9fa] placeholder:text-[#747685]/50 py-4 px-0 border-b border-[#434654] focus:border-[#2051ce] transition-all duration-300 outline-none"
             id="username"
-            placeholder="Enter system alias"
+            placeholder="Digite seu nome de usuário"
             type="text"
             {...register("username")}
           />
@@ -61,7 +61,7 @@ export function LoginFormFields({
           <input
             className="w-full bg-[#333536]/10 border-0 focus:ring-2 focus:ring-[#2051ce] text-[#f8f9fa] placeholder:text-[#747685]/50 py-4 px-0 border-b border-[#434654] focus:border-[#2051ce] transition-all duration-300 outline-none"
             id="password"
-            placeholder="••••••••"
+            placeholder="Digite sua senha"
             type="password"
             {...register("password")}
           />

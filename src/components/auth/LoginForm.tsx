@@ -5,7 +5,7 @@ import { useAuth } from "@/providers/AuthProvider";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { apiClient } from "@/services/apiClient";
+import { apiClient, getApiError } from "@/services/apiClient";
 import { LoginFormFields } from "./LoginFormFields";
 
 const loginSchema = z.object({
@@ -50,8 +50,8 @@ export function LoginForm() {
 
       login({ name: data.username, email: "otavio@gemini.ai" }, token);
     } catch (err: unknown) {
-      console.error(err);
-      setAuthError("Falha na autenticação. Verifique suas credenciais.");
+      const apiError = getApiError(err);
+      setAuthError(apiError.message);
     }
   };
 
