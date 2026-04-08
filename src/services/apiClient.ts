@@ -1,3 +1,4 @@
+import { LoginResponse, RegisterResponse } from "@/interfaces/ILoginRegister";
 import { Api, type HttpResponse } from "./api";
 
 export const apiClient = new Api({
@@ -8,11 +9,6 @@ async function parseResponse<T>(response: Response): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export interface LoginResponse {
-  message: string;
-  token: string;
-}
-
 export const authService = {
   login: async (credentials: {
     userName: string;
@@ -20,6 +16,15 @@ export const authService = {
   }): Promise<LoginResponse> => {
     const response = await apiClient.api.postApiAuthLogin(credentials);
     return parseResponse<LoginResponse>(response);
+  },
+
+  register: async (data: {
+    name: string;
+    userName: string;
+    password: string;
+  }): Promise<RegisterResponse> => {
+    const response = await apiClient.api.postApiUsers(data);
+    return parseResponse<RegisterResponse>(response);
   },
 };
 

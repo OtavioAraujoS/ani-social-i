@@ -3,8 +3,7 @@
 import { useAuth } from "@/providers/AuthProvider";
 
 export default function DashboardPage() {
-  const { user } = useAuth();
-
+  const { user, logout } = useAuth();
   return (
     <main className="min-h-screen bg-surface">
       <div className="p-12 space-y-6">
@@ -17,6 +16,13 @@ export default function DashboardPage() {
           </p>
         </header>
       </div>
+
+      <button
+        onClick={logout}
+        className="bg-primary text-primary-foreground px-4 py-2 rounded-md"
+      >
+        Logout
+      </button>
     </main>
   );
 }
