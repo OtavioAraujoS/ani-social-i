@@ -6,6 +6,8 @@ import { projectLinks } from "@/utils/projectLinks";
 import Link from "next/link";
 import { useAuth } from "@/providers/AuthProvider";
 import { Moon, Sun } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export default function HomeLayout({
   children,
@@ -14,9 +16,20 @@ export default function HomeLayout({
 }) {
   const { isAuthenticated, logout } = useAuth();
   const { toggleTheme } = useThemeHook();
+  const pathname = usePathname();
+
+  const wallpaperRoutes = ["/home", "/animes", "/forum"];
+  const showWallpaper = wallpaperRoutes.some(
+    (route) => pathname === route || pathname.startsWith(route + "/"),
+  );
 
   return (
-    <div className="h-screen w-full flex flex-col text-slate-900 dark:text-white relative font-sans selection:bg-[#00F0FF]/30 overflow-hidden">
+    <div
+      className={cn(
+        "h-screen w-full flex flex-col text-slate-900 dark:text-white relative font-sans selection:bg-[#00F0FF]/30 overflow-hidden",
+        showWallpaper && "bg-wallpaper",
+      )}
+    >
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,240,255,0.04)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(0,240,255,0.08)_0%,transparent_70%)] pointer-events-none" />
 
       <header className="fixed top-0 left-0 right-0 z-50 w-full p-6 pointer-events-none">

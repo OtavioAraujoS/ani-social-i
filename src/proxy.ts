@@ -1,15 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-const PUBLIC_ROUTES = [
-  "/home",
-  "/login",
-  "/register",
-  "/app/home",
-  "/animes",
-  "/forum",
-  "/comunidade",
-];
+const PUBLIC_ROUTES = ["/home", "/login", "/register", "/animes", "/forum"];
 
 export function proxy(request: NextRequest) {
   const { nextUrl, cookies } = request;
