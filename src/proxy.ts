@@ -11,7 +11,7 @@ const PUBLIC_ROUTES = [
   "/comunidade",
 ];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { nextUrl, cookies } = request;
 
   const token = cookies.get("ani-social-token")?.value;
