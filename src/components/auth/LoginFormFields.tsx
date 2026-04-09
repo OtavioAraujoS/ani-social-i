@@ -38,6 +38,7 @@ export function LoginFormFields({
             id="username"
             placeholder="Digite seu nome de usuário"
             type="text"
+            autoComplete="username"
             {...register("username")}
           />
           {errors.username && (
@@ -63,6 +64,7 @@ export function LoginFormFields({
             id="password"
             placeholder="Digite sua senha"
             type="password"
+            autoComplete="current-password"
             {...register("password")}
           />
           {errors.password && (
