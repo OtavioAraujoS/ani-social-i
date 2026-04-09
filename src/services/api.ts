@@ -381,6 +381,7 @@ export class Api<
           id: string;
           name: string;
           userName: string;
+          rank: "S" | "A" | "B" | "C" | "D";
           avatarUrl: string | null;
           createdAt: date | string | number;
           updatedAt: date | string | number;
@@ -471,6 +472,7 @@ export class Api<
           id: string;
           name: string;
           userName: string;
+          rank: "S" | "A" | "B" | "C" | "D";
           avatarUrl: string | null;
           createdAt: date | string | number;
           updatedAt: date | string | number;
@@ -710,11 +712,13 @@ export class Api<
           createdByUserId: {
             userId: string;
             userName: string;
+            rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
           } | null;
           updatedByUserId: {
             userId: string;
             userName: string;
+            rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
           } | null;
           createdAt: date | string | number;
@@ -780,11 +784,13 @@ export class Api<
           createdByUserId: {
             userId: string;
             userName: string;
+            rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
           } | null;
           updatedByUserId: {
             userId: string;
             userName: string;
+            rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
           } | null;
           createdAt: date | string | number;
@@ -875,6 +881,7 @@ export class Api<
           createdByUserId: {
             userId: string;
             userName: string;
+            rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
           } | null;
           createdAt: string;

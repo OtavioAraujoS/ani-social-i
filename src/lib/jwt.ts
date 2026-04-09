@@ -1,3 +1,5 @@
+export type Rank = "S" | "A" | "B" | "C" | "D";
+
 export interface JwtPayload {
   sub: string;
   role: string;
@@ -7,6 +9,7 @@ export interface JwtPayload {
   exp: number;
   iat: number;
   avatar: string;
+  rank: Rank;
 }
 
 export function decodeJwt(token: string): JwtPayload {
