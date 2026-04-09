@@ -19,6 +19,7 @@ export interface AuthUser {
   role: string;
   createdAt: string;
   exp: number;
+  avatar: string;
 }
 
 interface AuthState {
@@ -58,6 +59,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           role: payload.role,
           createdAt: payload.createdAt,
           exp: payload.exp,
+          avatar: payload.avatar,
         };
 
         set({ user, token, isAuthenticated: true });
