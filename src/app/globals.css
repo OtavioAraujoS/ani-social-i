@@ -25,6 +25,22 @@
   --color-outline-variant: var(--outline-variant);
 
   --font-sans: var(--font-inter), Arial, Helvetica, sans-serif;
+
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-sidebar-border: var(--sidebar-border);
+
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+
+  --color-sidebar-accent: var(--sidebar-accent);
+
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+
+  --color-sidebar-primary: var(--sidebar-primary);
+
+  --color-sidebar-foreground: var(--sidebar-foreground);
+
+  --color-sidebar: var(--sidebar);
 }
 
 :root {
@@ -46,6 +62,22 @@
   --outline-variant: #c4c5d6;
 
   --bg-image: url("/bgWhite.png");
+
+  --sidebar: hsl(0 0% 98%);
+
+  --sidebar-foreground: hsl(240 5.3% 26.1%);
+
+  --sidebar-primary: hsl(240 5.9% 10%);
+
+  --sidebar-primary-foreground: hsl(0 0% 98%);
+
+  --sidebar-accent: hsl(240 4.8% 95.9%);
+
+  --sidebar-accent-foreground: hsl(240 5.9% 10%);
+
+  --sidebar-border: hsl(220 13% 91%);
+
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
 
 .dark {
@@ -70,6 +102,23 @@
   --accent-cyan: #00f0ff;
 
   --bg-image: url("/bgDark.png");
+
+  /* Kintsugi Azure – Sidebar tokens */
+  --sidebar: rgba(10, 14, 20, 0.85);
+
+  --sidebar-foreground: hsl(220 20% 92%);
+
+  --sidebar-primary: #00f0ff;
+
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+
+  --sidebar-accent: rgba(0, 240, 255, 0.08);
+
+  --sidebar-accent-foreground: hsl(220 20% 96%);
+
+  --sidebar-border: rgba(0, 240, 255, 0.12);
+
+  --sidebar-ring: #00f0ff;
 }
 
 @keyframes spin-glow {
@@ -151,4 +200,41 @@ body {
 
   color: var(--on-surface);
   font-family: var(--font-sans);
+}
+
+/* ── App Sidebar – Kintsugi Azure glassmorphism ──────────────── */
+.app-sidebar {
+  background: rgba(10, 14, 20, 0.82) !important;
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-right: 1px solid rgba(0, 240, 255, 0.10) !important;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Active nav item – cyan left-border accent */
+.app-sidebar [data-active="true"] {
+  background: rgba(0, 240, 255, 0.08) !important;
+  position: relative;
+}
+
+.app-sidebar [data-active="true"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
+  background: #00f0ff;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+}
+
+/* Logo mark glow */
+.app-sidebar__logo {
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.15);
+}
+
+/* Group label */
+.app-sidebar__group-label {
+  letter-spacing: 0.18em;
 }
