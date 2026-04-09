@@ -57,6 +57,20 @@ export function RegisterForm() {
       setAuthError(apiError.message);
     }
   };
+
+  if (success) {
+    return (
+      <div className="flex-1 flex flex-col justify-center items-center px-6 py-12 md:px-16 lg:px-24 text-center space-y-4">
+        <div className="w-12 h-12 mx-auto rounded-full bg-[#59e054]/20 border border-[#59e054]/40 flex items-center justify-center">
+          <span className="text-[#59e054] text-2xl">✓</span>
+        </div>
+        <p className="text-[#f8f9fa] font-bold text-lg">
+          Conta criada com sucesso!
+        </p>
+        <p className="text-[#747685] text-sm">Redirecionando para o login...</p>
+      </div>
+    );
+  }
   return (
     <section className="flex-1 w-full md:w-1/2 lg:w-2/5 flex flex-col bg-[#0c0e0f] relative md:min-h-screen overflow-y-auto">
       <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(32,81,206,0.1)_0%,rgba(32,81,206,0.05)_100%)] pointer-events-none"></div>
@@ -77,28 +91,14 @@ export function RegisterForm() {
             </p>
           </header>
 
-          {success ? (
-            <div className="text-center space-y-4 py-8">
-              <div className="w-12 h-12 mx-auto rounded-full bg-[#59e054]/20 border border-[#59e054]/40 flex items-center justify-center">
-                <span className="text-[#59e054] text-2xl">✓</span>
-              </div>
-              <p className="text-[#f8f9fa] font-bold text-lg">
-                Conta criada com sucesso!
-              </p>
-              <p className="text-[#747685] text-sm">
-                Redirecionando para o login...
-              </p>
-            </div>
-          ) : (
-            <RegisterFormFields
-              authError={authError}
-              handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              register={register}
-              errors={errors}
-              isSubmitting={isSubmitting}
-            />
-          )}
+          <RegisterFormFields
+            authError={authError}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            errors={errors}
+            isSubmitting={isSubmitting}
+          />
 
           <footer className="mt-8 text-center">
             <p className="text-[10px] tracking-[0.15em] uppercase text-[#747685]">

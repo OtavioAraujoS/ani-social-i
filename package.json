@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "generate:api": "node --env-file=.env scripts/generate-api.js",
-    "docker:dev": "docker compose up --build",
-    "docker:dev:down": "docker compose down"
+    "docker:dev": "docker compose up --build -d && docker compose logs -f",
+    "docker:dev:down": "docker compose down",
+    "docker:dev:clean": "docker compose down -v && pnpm docker:dev"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

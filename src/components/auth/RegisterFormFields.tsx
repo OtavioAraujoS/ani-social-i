@@ -43,6 +43,7 @@ export function RegisterFormFields({
             id="name"
             placeholder="Digite seu nome completo"
             type="text"
+            autoComplete="name"
             {...register("name")}
           />
           {errors.name && (
@@ -66,6 +67,7 @@ export function RegisterFormFields({
             id="username"
             placeholder="@seu_usuario"
             type="text"
+            autoComplete="username"
             {...register("username")}
           />
           {errors.username && (
@@ -89,6 +91,7 @@ export function RegisterFormFields({
             id="password"
             placeholder="Crie uma senha forte"
             type="password"
+            autoComplete="new-password"
             {...register("password")}
           />
           {errors.password && (
@@ -112,6 +115,7 @@ export function RegisterFormFields({
             id="confirmPassword"
             placeholder="Repita sua senha"
             type="password"
+            autoComplete="new-password"
             {...register("confirmPassword")}
           />
           {errors.confirmPassword && (

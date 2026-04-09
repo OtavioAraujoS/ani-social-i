@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { decodeJwt, isTokenExpired, type JwtPayload } from "@/lib/jwt";
+import {
+  decodeJwt,
+  isTokenExpired,
+  type JwtPayload,
+  type Rank,
+} from "@/lib/jwt";
 
 const COOKIE_NAME = "ani-social-token";
 
@@ -20,6 +25,7 @@ export interface AuthUser {
   createdAt: string;
   exp: number;
   avatar: string;
+  rank: Rank;
 }
 
 interface AuthState {
@@ -60,6 +66,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           createdAt: payload.createdAt,
           exp: payload.exp,
           avatar: payload.avatar,
+          rank: payload.rank,
         };
 
         set({ user, token, isAuthenticated: true });

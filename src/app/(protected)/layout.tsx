@@ -12,7 +12,7 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-wallpaper min-h-screen">
+    <div className="min-h-screen">
       <SidebarProvider defaultOpen={false}>
         <AppSidebar />
         <SidebarInset className="bg-transparent">
