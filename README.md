@@ -1,4 +1,4 @@
-# 🌌 Ani Social (Otaku Sync)
+# 🌌 Ani Social
 
 **Ani Social** é uma plataforma social minimalista, moderna e de alta fidelidade projetada para a comunidade de anime. Combinando uma estética "Cyber-Lofi" com princípios de design "Nocturnal Precision", ela serve como um hub digital onde os residentes podem acompanhar seu histórico de episódios, participar de discussões profundas e manter-se conectados.
 
@@ -63,7 +63,3 @@ Você também pode executar o projeto usando Docker:
 ```bash
 pnpm docker:dev
 ```
-
----
-
-_“Nas rachaduras, há ouro. No silêncio, há harmonia.”_ — Otaku Sync Design Core
