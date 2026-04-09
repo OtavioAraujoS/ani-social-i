@@ -1,19 +1,17 @@
 "use client";
 
-import { useThemeHook } from "@/hooks/useThemeHook";
 import { Button } from "@/components/ui/button";
 import { projectLinks } from "@/utils/projectLinks";
 import Link from "next/link";
-import { Moon, Sun } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ThemeSwitch } from "@/components/ThemeSwitch";
 
 export default function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { toggleTheme } = useThemeHook();
   const pathname = usePathname();
 
   const wallpaperRoutes = ["/home", "/animes", "/forum"];
@@ -55,16 +53,7 @@ export default function HomeLayout({
           </nav>
 
           <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="rounded-full bg-transparent border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white/70 hover:bg-slate-100 dark:hover:bg-white/5"
-            >
-              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Mudar tema</span>
-            </Button>
+            <ThemeSwitch />
 
             <Link href="/login">
               <Button

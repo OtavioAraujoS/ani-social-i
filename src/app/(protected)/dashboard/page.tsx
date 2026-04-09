@@ -5,7 +5,7 @@ import { useAuth } from "@/providers/AuthProvider";
 export default function DashboardPage() {
   const { user, logout } = useAuth();
   return (
-    <main className="min-h-screen bg-surface">
+    <main className="min-h-screen">
       <div className="p-12 space-y-6">
         <header className="flex flex-col gap-2">
           <h1 className="text-4xl font-black text-[#00F0FF]">

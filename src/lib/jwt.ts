@@ -6,6 +6,7 @@ export interface JwtPayload {
   createdAt: string;
   exp: number;
   iat: number;
+  avatar: string;
 }
 
 export function decodeJwt(token: string): JwtPayload {
