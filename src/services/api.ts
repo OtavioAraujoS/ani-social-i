@@ -710,13 +710,13 @@ export class Api<
             imageUrl: string | null;
           };
           createdByUserId: {
-            userId: string;
+            name: string;
             userName: string;
             rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
           } | null;
           updatedByUserId: {
-            userId: string;
+            name: string;
             userName: string;
             rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
@@ -782,13 +782,13 @@ export class Api<
             imageUrl: string | null;
           };
           createdByUserId: {
-            userId: string;
+            name: string;
             userName: string;
             rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
           } | null;
           updatedByUserId: {
-            userId: string;
+            name: string;
             userName: string;
             rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
@@ -879,13 +879,13 @@ export class Api<
           content: string;
           topicId: string;
           createdByUserId: {
-            userId: string;
+            name: string;
             userName: string;
             rank: "S" | "A" | "B" | "C" | "D";
             avatarUrl: string | null;
           } | null;
-          createdAt: string;
-          updatedAt: string;
+          createdAt: date | string | number;
+          updatedAt: date | string | number;
         }[],
         any
       >({
@@ -981,6 +981,19 @@ export class Api<
         body: data,
         type: ContentType.Json,
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @name GetApiDashboard
+     * @request GET:/api/dashboard/
+     */
+    getApiDashboard: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/dashboard/`,
+        method: "GET",
         ...params,
       }),
   };
