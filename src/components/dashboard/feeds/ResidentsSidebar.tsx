@@ -1,4 +1,4 @@
-import { ResidentItem } from "../molecules/ResidentItem";
+import { ResidentItem } from "../cards/ResidentItem";
 import { residents } from "@/mock/dashboard";
 import { MonoText } from "../../MonoText";
 

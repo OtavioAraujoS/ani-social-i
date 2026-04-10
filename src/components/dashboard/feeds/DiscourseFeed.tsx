@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { DiscourseCard } from "../molecules/DiscourseCard";
+import { DiscourseCard } from "../cards/DiscourseCard";
 import { discoursePosts } from "@/mock/dashboard";
 
 export function DiscourseFeed() {

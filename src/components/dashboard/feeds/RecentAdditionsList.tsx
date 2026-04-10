@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { RecentAdditionCard } from "../molecules/RecentAdditionCard";
+import { RecentAdditionCard } from "../cards/RecentAdditionCard";
 import { recentAdditions } from "@/mock/dashboard";
 
 export function RecentAdditionsList() {
