@@ -1,8 +1,18 @@
 import Link from "next/link";
 import { RecentAdditionCard } from "../cards/RecentAdditionCard";
-import { recentAdditions } from "@/mock/dashboard";
 
-export function RecentAdditionsList() {
+import { AnimeDetailResponse } from "@/services/api";
+
+interface RecentAdditionsListProps {
+  animes?: AnimeDetailResponse[] | null;
+}
+
+export function RecentAdditionsList({ animes }: RecentAdditionsListProps) {
+  const displayAnimes =
+    animes && animes.length > 0
+      ? (animes as unknown as AnimeDetailResponse[])
+      : [];
+
   return (
     <section className="space-y-6">
       <div className="flex items-center justify-between">
@@ -23,10 +33,19 @@ export function RecentAdditionsList() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {recentAdditions.map((item) => (
-          <RecentAdditionCard key={item.id} title={item.title} />
-        ))}
+      <div className="relative">
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+          {displayAnimes.map((item) => (
+            <div
+              key={`${item.id}-${item.title}`}
+              className="flex-none w-40 md:w-50 snap-start"
+            >
+              <RecentAdditionCard anime={item} />
+            </div>
+          ))}
+        </div>
+
+        <div className="absolute top-0 right-0 h-full w-20 bg-linear-to-l from-background/80 to-transparent pointer-events-none" />
       </div>
     </section>
   );
