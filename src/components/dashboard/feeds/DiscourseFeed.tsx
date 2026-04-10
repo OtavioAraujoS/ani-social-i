@@ -1,8 +1,13 @@
-import Link from "next/link";
+import { ITopics } from "@/interfaces/ITopics";
 import { DiscourseCard } from "../cards/DiscourseCard";
-import { discoursePosts } from "@/mock/dashboard";
+import { NeonButtonRedirect } from "@/components/NeonButtonRedirect";
 
-export function DiscourseFeed() {
+interface DiscourseFeedProps {
+  topics?: ITopics[];
+}
+
+export function DiscourseFeed({ topics }: DiscourseFeedProps) {
+  const displayPosts = (topics && topics.length > 0 ? topics : []) as ITopics[];
   return (
     <section className="space-y-6">
       <div className="flex items-center justify-between">
@@ -12,21 +17,15 @@ export function DiscourseFeed() {
             Tópicos Recentes
           </h2>
         </div>
-        <button className="flex items-center gap-2 bg-[#4c6ef5] hover:bg-[#3b5bdb] text-white px-3 py-1 rounded-sm transition-colors">
-          <Link
-            href="/dashboard/topicos"
-            className="flex items-center cursor-pointer text-center py-1"
-          >
-            <span className="text-[9px] font-black tracking-widest uppercase">
-              Novo Tópico
-            </span>
-          </Link>
-        </button>
+        <NeonButtonRedirect
+          href="/dashboard/animes/cadastrar"
+          text="Cadastrar Anime"
+        />
       </div>
 
       <div className="grid grid-cols-1 gap-6">
-        {discoursePosts.slice(0, 5).map((post) => (
-          <DiscourseCard key={post.id} {...post} />
+        {displayPosts.slice(0, 5).map((post) => (
+          <DiscourseCard key={post.id} topic={post} />
         ))}
       </div>
     </section>
