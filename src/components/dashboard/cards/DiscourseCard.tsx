@@ -6,7 +6,7 @@ import { ITopics } from "@/interfaces/ITopics";
 export function DiscourseCard({ topic }: { topic: ITopics }) {
   return (
     <div className="group space-y-3 rounded-lg border border-outline-variant/30 dark:border-white/5 bg-surface-container-lowest dark:bg-white/3 p-6 transition-all hover:bg-surface-container dark:hover:bg-white/6 hover:border-cyan-500/20 shadow-sm dark:shadow-none">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-4 md:gap-0">
         <CyberBadge variant={"gold"}>
           Criado por: {topic?.createdByUser?.userName || "Usuário"}
         </CyberBadge>
