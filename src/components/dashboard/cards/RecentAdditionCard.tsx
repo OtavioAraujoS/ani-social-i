@@ -11,7 +11,7 @@ export function RecentAdditionCard({ anime }: RecentAdditionCardProps) {
     <div className="group relative aspect-2/3 overflow-hidden rounded-md border border-outline-variant/30 dark:border-white/5 bg-surface-container-lowest dark:bg-white/2 transition-all hover:bg-surface-container dark:hover:bg-white/5 hover:border-cyan-500/30 shadow-sm dark:shadow-none">
       {anime.imageUrl ? (
         <Image
-          src={anime.imageUrl}
+          src={anime.imageUrl ?? "/notFoundPicture.png"}
           alt={anime.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-110"
