@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { PageError } from "@/components/PageError";
+import { toast } from "sonner";
 
 export default function GlobalError({
   error,
@@ -11,7 +12,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("Global Sanctuary Disruption:", error);
+    toast.error("Error: " + error.message);
   }, [error]);
 
   return (

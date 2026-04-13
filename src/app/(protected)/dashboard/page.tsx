@@ -1,6 +1,7 @@
 import { DashboardPageHandler } from "@/components/dashboard/DashboardPageHandler";
-import { apiClient } from "@/services/apiClient";
+import { apiClient, getApiError } from "@/services/apiClient";
 import { PageError } from "@/components/PageError";
+import { handleUnauthorizedServer } from "@/services/authUtils";
 
 export default async function DashboardPage() {
   const getDashboardResult = async () => {
@@ -8,9 +9,14 @@ export default async function DashboardPage() {
       const response = await apiClient.dashboard.getDashboard();
       return { data: response.data, isError: false as const };
     } catch (error) {
-      console.error("Failed to fetch dashboard data server-side:", error);
+      const apiError = getApiError(error);
+
+      if (apiError.status === 401) {
+        await handleUnauthorizedServer();
+      }
+
       return {
-        error: error instanceof Error ? error : new Error("Unknown error"),
+        error: apiError,
         isError: true as const,
       };
     }

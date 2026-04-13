@@ -13,37 +13,19 @@ export const apiClient = new Api({
       const { useAuthStore } = await import("@/stores/authStore");
       token = useAuthStore.getState().token;
 
-      if (token) {
-        console.log(
-          "[apiClient] Token retrieved from authStore (Client):",
-          true,
-        );
-      } else {
+      if (!token) {
         const { getCookie } = await import("@/lib/cookie");
         token = getCookie("ani-social-token");
-        console.log(
-          "[apiClient] Token retrieved from cookies (Client):",
-          !!token,
-        );
       }
     } else {
       try {
         const { cookies } = await import("next/headers");
         const cookieStore = await cookies();
         token = cookieStore.get("ani-social-token")?.value;
-        console.log(
-          "[apiClient] Token retrieved from cookies (Server):",
-          !!token,
-        );
-      } catch (error) {
-        console.warn("[apiClient] Failed to access cookies on server:", error);
-      }
+      } catch {}
     }
 
     if (!token) {
-      console.warn(
-        "[apiClient] No token found. Request will be sent without Authorization header.",
-      );
       return {};
     }
 
