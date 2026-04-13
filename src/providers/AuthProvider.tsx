@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useAuthStore } from "@/stores/authStore";
+import { redirect } from "next/navigation";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const rehydrate = useAuthStore((s) => s.rehydrate);
@@ -19,5 +20,10 @@ export function useAuth() {
   const login = useAuthStore((s) => s.login);
   const logout = useAuthStore((s) => s.logout);
 
-  return { user, isAuthenticated, login, logout };
+  const handleUnauthorized = () => {
+    logout();
+    redirect("/login");
+  };
+
+  return { user, isAuthenticated, login, logout, handleUnauthorized };
 }

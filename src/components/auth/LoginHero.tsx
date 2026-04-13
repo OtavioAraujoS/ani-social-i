@@ -23,11 +23,11 @@ export function LoginHero() {
           <div className="h-px w-12 bg-[#2051ce] mb-6"></div>
           <h1 className="font-black text-4xl sm:text-5xl lg:text-7xl tracking-tighter text-white leading-none mb-4 [text-shadow:0_0_20px_rgba(32,81,206,0.4)]">
             AME CADA MOMENTO <br />
-            <span className="text-[#416be8]">DOS SEUS ANIMES.</span>
+            <span className="text-[#416be8]">DOS SEUS ANIMES</span>
           </h1>
           <p className="text-[#c4c5d6] text-sm sm:text-base lg:text-lg font-medium tracking-tight max-w-md">
             Acompanhe seus animes favoritos, compartilhe com seus amigos e
-            participe de discussões.
+            participe de discussões
           </p>
         </div>
         <div className="flex items-center space-x-6">
