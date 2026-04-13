@@ -51,7 +51,7 @@ export function ErrorPageHero({
             key={idx}
             onClick={action.onClick}
             className={`
-              px-8 py-4 rounded-sm flex items-center justify-center gap-3 font-bold text-xs uppercase tracking-widest transition-all
+              cursor-pointer px-8 py-4 rounded-sm flex items-center justify-center gap-3 font-bold text-xs uppercase tracking-widest transition-all
               ${
                 action.primary
                   ? "bg-[#2051ce] hover:bg-[#1a41a3] text-white shadow-lg shadow-[#2051ce]/20"
