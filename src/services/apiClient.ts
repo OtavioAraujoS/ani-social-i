@@ -4,7 +4,7 @@ import { Api, type HttpResponse } from "./api";
 export const apiClient = new Api({
   baseUrl: process.env.NEXT_PUBLIC_API_URL || "",
   baseApiParams: {
-    secure: true, // Forces securityWorker to run for every request
+    secure: true,
   },
   securityWorker: async () => {
     let token: string | undefined | null;
@@ -12,10 +12,20 @@ export const apiClient = new Api({
     if (typeof window !== "undefined") {
       const { useAuthStore } = await import("@/stores/authStore");
       token = useAuthStore.getState().token;
-      console.log(
-        "[apiClient] Token retrieved from authStore (Client):",
-        !!token,
-      );
+
+      if (token) {
+        console.log(
+          "[apiClient] Token retrieved from authStore (Client):",
+          true,
+        );
+      } else {
+        const { getCookie } = await import("@/lib/cookie");
+        token = getCookie("ani-social-token");
+        console.log(
+          "[apiClient] Token retrieved from cookies (Client):",
+          !!token,
+        );
+      }
     } else {
       try {
         const { cookies } = await import("next/headers");
