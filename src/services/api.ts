@@ -741,10 +741,10 @@ export class Api<
      */
     getSocialAnimes: (
       query?: {
-        /** @default 1 */
-        page?: string | number;
-        /** @default 20 */
-        limit?: string | number;
+        page?: number;
+        limit?: number;
+        /** @format uuid */
+        userId?: string;
       },
       params: RequestParams = {},
     ) =>
