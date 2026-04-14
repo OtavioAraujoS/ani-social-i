@@ -79,18 +79,21 @@ export type UserListResponse = {
   updatedAt: date | string | number;
 }[];
 
-export type AnimeListResponse = {
-  id: string;
-  title: string;
-  description: string;
-  episodes: number;
-  review: string | null;
-  stars: number | null;
-  imageUrl: string | null;
-  status: "COMPLETED" | "RELEASING" | "PENDING";
-  createdAt: date | string | number;
-  updatedAt: date | string | number;
-}[];
+export interface AnimeListResponse {
+  data: {
+    id: string;
+    title: string;
+    description: string;
+    episodes: number;
+    review: string | null;
+    stars: number | null;
+    imageUrl: string | null;
+    status: "COMPLETED" | "RELEASING" | "PENDING";
+    createdAt: date | string | number;
+    updatedAt: date | string | number;
+  }[];
+  total: number;
+}
 
 export type AnimeDetailResponse = {
   id: string;
@@ -745,6 +748,7 @@ export class Api<
         limit?: number;
         /** @format uuid */
         userId?: string;
+        title?: string;
       },
       params: RequestParams = {},
     ) =>
