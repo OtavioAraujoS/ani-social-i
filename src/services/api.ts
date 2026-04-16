@@ -351,8 +351,10 @@ export interface ApiConfig<SecurityDataType = unknown> {
   customFetch?: typeof fetch;
 }
 
-export interface HttpResponse<D extends unknown, E extends unknown = unknown>
-  extends Response {
+export interface HttpResponse<
+  D extends unknown,
+  E extends unknown = unknown,
+> extends Response {
   data: D;
   error: E;
 }
@@ -555,8 +557,18 @@ export class HttpClient<SecurityDataType = unknown> {
               }
               return r;
             })
-            .catch((e) => {
-              r.error = e;
+            .catch(async (e) => {
+              if (responseFormat === "json") {
+                try {
+                  const text = await response.clone().text();
+                  r.error =
+                    typeof text === "string" && text.length > 0 ? text : e;
+                } catch {
+                  r.error = e;
+                }
+              } else {
+                r.error = e;
+              }
               return r;
             });
 
