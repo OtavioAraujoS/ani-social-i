@@ -1,8 +1,9 @@
 "use client";
 
-import { Search, PlusCircle } from "lucide-react";
+import { Search } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CollectionDialog } from "./CollectionDialog";
 
 export function CollectionHeader() {
   const searchParams = useSearchParams();
@@ -54,10 +55,7 @@ export function CollectionHeader() {
           />
         </div>
 
-        <button className="cursor-pointer flex items-center gap-2 bg-linear-to-r from-[#8bb4f9] to-[#5182ed] dark:from-[#1c61d8] dark:to-[#031e58] hover:opacity-90 transition-opacity text-white px-6 py-3.5 rounded-full font-semibold shadow-lg shadow-blue-500/20 dark:shadow-blue-900/20 shrink-0 w-full md:w-auto justify-center">
-          <PlusCircle className="w-5 h-5 text-white/90" />
-          Registrar novo anime
-        </button>
+        <CollectionDialog />
       </div>
     </header>
   );
