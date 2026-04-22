@@ -7,6 +7,8 @@ import { CollectionFields } from "./CollectionFields";
 import { CreateAnimeSchema, type CreateAnime } from "./CollectionSchema";
 import { toast } from "sonner";
 import { AlertError } from "../Alert";
+import { UpdateAnime } from "@/services/api";
+import { useRouter } from "next/navigation";
 
 interface CollectionFormProps {
   initialData?: CreateAnime;
@@ -28,6 +30,7 @@ export function CollectionForm({
   isEditing = false,
 }: CollectionFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(CreateAnimeSchema),
@@ -36,19 +39,38 @@ export function CollectionForm({
 
   const { handleSubmit } = form;
 
-  async function onSubmit(data: CreateAnime) {
+  async function onSubmit(data: CreateAnime | UpdateAnime) {
     setIsLoading(true);
     try {
       if (isEditing && initialData?.id) {
-        toast.success("Anime atualizado com sucesso!");
+        const response = await apiClient.social.patchSocialAnimes({
+          animeId: initialData.id,
+          title: data.title,
+          description: data.description,
+          episodes: data.episodes,
+          stars: data.stars,
+          status: data.status,
+          review: data.review,
+        });
+        if (response.data.success) {
+          toast.success("Anime atualizado com sucesso!");
+          const closeButton = document.querySelector(
+            '[data-slot="dialog-close"]',
+          ) as HTMLButtonElement;
+          if (closeButton) closeButton.click();
+          router.refresh();
+        }
       } else {
-        const response = await apiClient.social.postSocialAnimes(data);
+        const response = await apiClient.social.postSocialAnimes(
+          data as CreateAnime,
+        );
         if (response.data.success) {
           toast.success("Anime registrado com sucesso!");
           const closeButton = document.querySelector(
             '[data-slot="dialog-close"]',
           ) as HTMLButtonElement;
           if (closeButton) closeButton.click();
+          router.refresh();
         }
       }
     } catch (error) {
@@ -58,7 +80,6 @@ export function CollectionForm({
       setIsLoading(false);
     }
   }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CollectionFields
