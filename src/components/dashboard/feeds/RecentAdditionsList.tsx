@@ -23,8 +23,8 @@ export function RecentAdditionsList({ animes }: RecentAdditionsListProps) {
           </h2>
         </div>
         <NeonButtonRedirect
-          href="/dashboard/animes/cadastrar"
-          text="Cadastrar Anime"
+          href="/colecoes"
+          text="Animes Cadastrados"
           color="amber"
         />
       </div>

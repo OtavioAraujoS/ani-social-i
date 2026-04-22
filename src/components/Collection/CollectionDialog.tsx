@@ -6,6 +6,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { CollectionForm } from "./CollectionForm";
+import { DialogTitleStyled } from "../DialogTitleStyled";
 
 export function CollectionDialog() {
   return (
@@ -18,21 +19,13 @@ export function CollectionDialog() {
       </DialogTrigger>
       <DialogContent className="md:max-w-7xl w-[calc(100%-2rem)] p-0 overflow-hidden">
         <DialogTitle className="sr-only">Cadastrar Anime</DialogTitle>
-        <main className="flex-1 flex flex-col z-10 min-h-0">
-          <div className="flex-1 px-12 py-8 overflow-y-auto min-h-0">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="h-px w-8 bg-primary/30 dark:bg-primary/50"></div>
-              <span className="sanctuary-label text-primary dark:text-slate-300">
-                Modulo de Anime
-              </span>
-            </div>
-            <div className="flex flex-wrap gap-4 mb-6 text-3xl md:text-6xl font-black text-indigo-900 dark:text-slate-100 tracking-tighter leading-[0.9]">
-              <span>Registrar / Editar</span>
-              <span className="text-primary dark:text-blue-400">Anime</span>
-            </div>
-            <CollectionForm />
-          </div>
-        </main>
+        <DialogTitleStyled
+          title="Modulo de Anime"
+          description="Registrar / Editar"
+          descriptionReason="Anime"
+        >
+          <CollectionForm />
+        </DialogTitleStyled>
       </DialogContent>
     </Dialog>
   );
