@@ -37,7 +37,6 @@ export default async function CollectionsPage({
   };
 
   const result = await getCollectionsResult();
-
   if (result.isError) {
     return (
       <PageError

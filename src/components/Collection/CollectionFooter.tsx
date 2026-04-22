@@ -42,7 +42,7 @@ export function CollectionFooter({
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="w-8 h-8 flex items-center justify-center rounded-lg bg-transparent hover:bg-[#f0f2f5] dark:hover:bg-[#2d3135] text-[#8899a6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-8 h-8 flex items-center justify-center rounded-lg bg-transparent hover:bg-[#f0f2f5] dark:hover:bg-[#2d3135] text-[#8899a6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -54,7 +54,7 @@ export function CollectionFooter({
             className={`w-8 h-8 flex items-center justify-center rounded-lg font-medium text-sm transition-colors ${
               currentPage === page
                 ? "bg-[#5182ed] text-white shadow-sm"
-                : "bg-transparent hover:bg-[#f0f2f5] dark:hover:bg-[#2d3135] text-[#8899a6] dark:text-[#94a3b8]"
+                : "bg-transparent hover:bg-[#f0f2f5] dark:hover:bg-[#2d3135] text-[#8899a6] dark:text-[#94a3b8] cursor-pointer"
             }`}
           >
             {page}
@@ -64,7 +64,7 @@ export function CollectionFooter({
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="w-8 h-8 flex items-center justify-center rounded-lg bg-transparent hover:bg-[#f0f2f5] dark:hover:bg-[#2d3135] text-[#8899a6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-8 h-8 flex items-center justify-center rounded-lg bg-transparent hover:bg-[#f0f2f5] dark:hover:bg-[#2d3135] text-[#8899a6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           <ChevronRight className="w-4 h-4" />
         </button>
