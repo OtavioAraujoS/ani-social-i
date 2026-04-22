@@ -21,7 +21,7 @@ export function CollectionDialog() {
         <DialogTitle className="sr-only">Cadastrar Anime</DialogTitle>
         <DialogTitleStyled
           title="Modulo de Anime"
-          description="Registrar / Editar"
+          description="Registrar"
           descriptionReason="Anime"
         >
           <CollectionForm />
