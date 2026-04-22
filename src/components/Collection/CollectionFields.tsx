@@ -1,4 +1,4 @@
-import { ChevronDown, PlusSquare, Star } from "lucide-react";
+import { ChevronDown, PlusSquare, Star, Trash } from "lucide-react";
 import { motion } from "motion/react";
 import { Controller, type UseFormReturn } from "react-hook-form";
 import { Label } from "../ui/label";
@@ -8,12 +8,14 @@ interface CollectionFieldsProps {
   form: UseFormReturn<CreateAnime>;
   isLoading?: boolean;
   isEditing?: boolean;
+  removeAnime: () => void;
 }
 
 export function CollectionFields({
   form,
   isLoading = false,
   isEditing = false,
+  removeAnime,
 }: CollectionFieldsProps) {
   const {
     register,
@@ -21,7 +23,7 @@ export function CollectionFields({
   } = form;
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-5">
         <div>
           <Label className="sanctuary-label block mb-2 dark:text-slate-200">
             Title
@@ -148,11 +150,22 @@ export function CollectionFields({
           )}
         </div>
 
-        <div className="flex justify-end pt-4">
+        <div className="flex gap-5 justify-end mt-5">
+          {isEditing && (
+            <button
+              type="button"
+              disabled={isLoading}
+              onClick={removeAnime}
+              className="cursor-pointer bg-red-700 dark:bg-red-800 text-white px-8 py-3 rounded-lg font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-red-600 dark:hover:bg-red-700 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? "Removendo..." : "Remover Anime"}
+              <Trash size={16} />
+            </button>
+          )}
           <button
             type="submit"
-            disabled={isLoading || Object.keys(errors).length > 0}
-            className="cursor-pointer bg-primary dark:bg-blue-900 text-white px-8 py-3 rounded-lg font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-primary/90 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isLoading}
+            className="cursor-pointer bg-primary dark:bg-blue-900 text-white px-8 py-3 rounded-lg font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-blue-600 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading
               ? isEditing

@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { apiClient, getApiError } from "@/services/apiClient";
@@ -8,11 +7,14 @@ import { CreateAnimeSchema, type CreateAnime } from "./CollectionSchema";
 import { toast } from "sonner";
 import { AlertError } from "../Alert";
 import { UpdateAnime } from "@/services/api";
+import { LoadingAndRefresh } from "@/utils/LoadingAndRefresh";
 import { useRouter } from "next/navigation";
 
 interface CollectionFormProps {
   initialData?: CreateAnime;
   isEditing?: boolean;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
 const DEFAULT_VALUES: CreateAnime = {
@@ -28,16 +30,38 @@ const DEFAULT_VALUES: CreateAnime = {
 export function CollectionForm({
   initialData,
   isEditing = false,
+  isLoading,
+  setIsLoading,
 }: CollectionFormProps) {
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
   const form = useForm({
     resolver: zodResolver(CreateAnimeSchema),
     defaultValues: initialData || DEFAULT_VALUES,
   });
-
   const { handleSubmit } = form;
+
+  async function removeAnime() {
+    setIsLoading(true);
+    try {
+      if (!initialData?.id) return;
+      const response = await apiClient.social.deleteSocialAnimesByAnimeId(
+        initialData?.id,
+      );
+      if (response.data.success) {
+        toast.success("Anime removido com sucesso!");
+        await LoadingAndRefresh(router);
+        const closeButton = document.querySelector(
+          '[data-slot="dialog-close"]',
+        ) as HTMLButtonElement;
+        if (closeButton) closeButton.click();
+      }
+    } catch (error) {
+      const apiError = getApiError(error);
+      AlertError(apiError);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   async function onSubmit(data: CreateAnime | UpdateAnime) {
     setIsLoading(true);
@@ -58,7 +82,7 @@ export function CollectionForm({
             '[data-slot="dialog-close"]',
           ) as HTMLButtonElement;
           if (closeButton) closeButton.click();
-          router.refresh();
+          LoadingAndRefresh(router);
         }
       } else {
         const response = await apiClient.social.postSocialAnimes(
@@ -70,7 +94,7 @@ export function CollectionForm({
             '[data-slot="dialog-close"]',
           ) as HTMLButtonElement;
           if (closeButton) closeButton.click();
-          router.refresh();
+          LoadingAndRefresh(router);
         }
       }
     } catch (error) {
@@ -86,6 +110,7 @@ export function CollectionForm({
         form={form}
         isLoading={isLoading}
         isEditing={isEditing}
+        removeAnime={removeAnime}
       />
     </form>
   );

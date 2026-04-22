@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Badge } from "../Badge";
 import { CollectionHeader } from "./CollectionHeader";
 import { CollectionFooter } from "./CollectionFooter";
+import { CollectionDialogEdit } from "./CollectionDialogEdit";
 
 interface CollectionPageHandlerProps {
   collectionsData: AnimeListResponse;
@@ -30,14 +31,16 @@ export function CollectionPageHandler({
                 className="group relative flex flex-col bg-white dark:bg-[#1a1c1e] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_12px_30px_rgba(0,0,0,0.2)] transition-all duration-300 border border-[#eaedf1] dark:border-[#2d3135]"
               >
                 <div className="relative w-full aspect-2/3 overflow-hidden bg-[#eef1f5] dark:bg-[#25282c]">
-                  <Image
-                    src={anime.imageUrl || "/notFoundPicture.png"}
-                    alt={anime.title}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    width={500}
-                    height={750}
-                  />
+                  <CollectionDialogEdit anime={anime}>
+                    <Image
+                      src={anime.imageUrl || "/notFoundPicture.png"}
+                      alt={anime.title}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 cursor-pointer"
+                      loading="lazy"
+                      width={500}
+                      height={750}
+                    />
+                  </CollectionDialogEdit>
                   <Badge status={anime.status} />
                 </div>
 
