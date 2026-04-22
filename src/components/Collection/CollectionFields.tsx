@@ -1,6 +1,6 @@
 import { ChevronDown, PlusSquare, Star } from "lucide-react";
 import { motion } from "motion/react";
-import { type UseFormReturn } from "react-hook-form";
+import { Controller, type UseFormReturn } from "react-hook-form";
 import { Label } from "../ui/label";
 import { type CreateAnime } from "./CollectionSchema";
 
@@ -17,11 +17,8 @@ export function CollectionFields({
 }: CollectionFieldsProps) {
   const {
     register,
-    watch,
     formState: { errors },
   } = form;
-
-  const stars = watch("stars") || 5;
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
       <div className="flex flex-col gap-3">
@@ -90,37 +87,30 @@ export function CollectionFields({
           <label className="sanctuary-label block mb-2 dark:text-slate-200">
             Star Rating
           </label>
-          <div className="flex gap-1 bg-gold/5 dark:bg-slate-800/50 w-fit p-2 rounded-lg">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <button
-                key={star}
-                type="button"
-                onClick={() => {
-                  const input = document.querySelector(
-                    'input[name="stars"]',
-                  ) as HTMLInputElement;
-                  if (input) {
-                    input.value = String(star);
-                    const event = new Event("change", { bubbles: true });
-                    input.dispatchEvent(event);
-                  }
-                }}
-                className={`transition-all duration-300 ${
-                  star <= stars ? "text-gold" : "text-gold/20"
-                }`}
-              >
-                <Star
-                  size={24}
-                  fill={star <= stars ? "currentColor" : "none"}
-                  className="cursor-pointer text-amber-500"
-                />
-              </button>
-            ))}
-          </div>
-          <input
-            {...register("stars", { valueAsNumber: true })}
-            type="hidden"
-            value={stars}
+          <Controller
+            name="stars"
+            control={form.control}
+            defaultValue={5}
+            render={({ field: { value, onChange } }) => (
+              <div className="flex gap-1 bg-gold/5 dark:bg-slate-800/50 w-fit p-2 rounded-lg">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    type="button"
+                    onClick={() => onChange(star)} // O Controller cuida do setValue internamente
+                    className={`transition-all duration-300 ${
+                      star <= value ? "text-gold" : "text-gold/20"
+                    }`}
+                  >
+                    <Star
+                      size={24}
+                      fill={star <= value ? "currentColor" : "none"}
+                      className="cursor-pointer text-amber-500"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           />
         </div>
 
