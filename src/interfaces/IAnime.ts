@@ -9,8 +9,8 @@ export interface IAnime {
   stars: number | null;
   imageUrl: string | null;
   status: "COMPLETED" | "RELEASING" | "PENDING";
-  createdAt: Date | string | number;
-  updatedAt: Date | string | number;
-  createdByUser: ICreatedByUser;
-  updatedByUser: IUpdatedByUser;
+  createdAt?: Date | string | number;
+  updatedAt?: Date | string | number;
+  createdByUser?: ICreatedByUser;
+  updatedByUser?: IUpdatedByUser;
 }

@@ -1,5 +1,6 @@
 import { LoginResponse, RegisterResponse } from "@/interfaces/ILoginRegister";
 import { Api, type HttpResponse } from "./api";
+import { decodeJwt, isTokenExpired } from "@/lib/jwt";
 
 export const apiClient = new Api({
   baseUrl: process.env.NEXT_PUBLIC_API_URL || "",
@@ -16,6 +17,34 @@ export const apiClient = new Api({
       if (!token) {
         const { getCookie } = await import("@/lib/cookie");
         token = getCookie("ani-social-token");
+      }
+
+      if (!token) {
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/login";
+        }
+        return {};
+      }
+
+      try {
+        const payload = decodeJwt(token);
+        if (isTokenExpired(payload)) {
+          if (useAuthStore.getState().logout) {
+            useAuthStore.getState().logout();
+          }
+          if (window.location.pathname !== "/login") {
+            window.location.href = "/login";
+          }
+          return {};
+        }
+      } catch {
+        if (useAuthStore.getState().logout) {
+          useAuthStore.getState().logout();
+        }
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/login";
+        }
+        return {};
       }
     } else {
       try {
@@ -77,22 +106,65 @@ export class ApiError extends Error {
   }
 }
 
+function normalizeErrorMessage(value: unknown): string | undefined {
+  if (typeof value !== "string") {
+    return undefined;
+  }
+
+  const trimmed = value.trim();
+  const errorMatch = trimmed.match(/(?:^| - )Error:\s*(.+)$/i);
+  if (errorMatch?.[1]) {
+    return errorMatch[1].trim();
+  }
+
+  if (/^Error:\s*/i.test(trimmed)) {
+    return trimmed.replace(/^Error:\s*/i, "").trim();
+  }
+
+  return trimmed.length > 0 ? trimmed : undefined;
+}
+
+function safeErrorMessage(value: unknown, fallback: string): string {
+  if (typeof value === "string") {
+    return normalizeErrorMessage(value) ?? fallback;
+  }
+
+  if (value instanceof Error) {
+    return normalizeErrorMessage(value.message) ?? fallback;
+  }
+
+  if (typeof value === "object" && value !== null) {
+    const body = value as Record<string, unknown>;
+    const messageValue =
+      typeof body.message === "string"
+        ? body.message
+        : typeof body.error === "string"
+          ? body.error
+          : undefined;
+    return normalizeErrorMessage(messageValue) ?? fallback;
+  }
+
+  return fallback;
+}
+
 export function getApiError(err: unknown): ApiError {
-  if (isHttpResponse(err)) {
-    const status = err.status;
-    const body = err.error as Record<string, unknown> | null;
-    const message =
-      (typeof body?.message === "string" && body.message) ||
-      (typeof body?.error === "string" && body.error) ||
-      httpStatusMessage(status);
-    return new ApiError(status, message);
-  }
+  try {
+    if (err instanceof ApiError) return err;
 
-  if (err instanceof Error) {
-    return new ApiError(0, err.message);
-  }
+    if (isHttpResponse(err)) {
+      const status = err.status;
+      const message = safeErrorMessage(err.error, httpStatusMessage(status));
+      return new ApiError(status, String(message));
+    }
 
-  return new ApiError(0, "Erro inesperado. Tente novamente.");
+    if (err instanceof Error) {
+      return new ApiError(0, err.message);
+    }
+
+    return new ApiError(0, "Erro inesperado. Tente novamente.");
+  } catch {
+    return new ApiError(0, "Erro ao processar resposta do servidor.");
+  }
 }
 
 function isHttpResponse(err: unknown): err is HttpResponse<unknown, unknown> {

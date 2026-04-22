@@ -79,18 +79,21 @@ export type UserListResponse = {
   updatedAt: date | string | number;
 }[];
 
-export type AnimeListResponse = {
-  id: string;
-  title: string;
-  description: string;
-  episodes: number;
-  review: string | null;
-  stars: number | null;
-  imageUrl: string | null;
-  status: "COMPLETED" | "RELEASING" | "PENDING";
-  createdAt: date | string | number;
-  updatedAt: date | string | number;
-}[];
+export interface AnimeListResponse {
+  data: {
+    id: string;
+    title: string;
+    description: string;
+    episodes: number;
+    review: string | null;
+    stars: number | null;
+    imageUrl: string | null;
+    status: "COMPLETED" | "RELEASING" | "PENDING";
+    createdAt: date | string | number;
+    updatedAt: date | string | number;
+  }[];
+  total: number;
+}
 
 export type AnimeDetailResponse = {
   id: string;
@@ -348,8 +351,10 @@ export interface ApiConfig<SecurityDataType = unknown> {
   customFetch?: typeof fetch;
 }
 
-export interface HttpResponse<D extends unknown, E extends unknown = unknown>
-  extends Response {
+export interface HttpResponse<
+  D extends unknown,
+  E extends unknown = unknown,
+> extends Response {
   data: D;
   error: E;
 }
@@ -552,8 +557,18 @@ export class HttpClient<SecurityDataType = unknown> {
               }
               return r;
             })
-            .catch((e) => {
-              r.error = e;
+            .catch(async (e) => {
+              if (responseFormat === "json") {
+                try {
+                  const text = await response.clone().text();
+                  r.error =
+                    typeof text === "string" && text.length > 0 ? text : e;
+                } catch {
+                  r.error = e;
+                }
+              } else {
+                r.error = e;
+              }
               return r;
             });
 
@@ -741,10 +756,11 @@ export class Api<
      */
     getSocialAnimes: (
       query?: {
-        /** @default 1 */
-        page?: string | number;
-        /** @default 20 */
-        limit?: string | number;
+        page?: number;
+        limit?: number;
+        /** @format uuid */
+        userId?: string;
+        title?: string;
       },
       params: RequestParams = {},
     ) =>

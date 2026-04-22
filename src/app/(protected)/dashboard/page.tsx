@@ -30,7 +30,7 @@ export default async function DashboardPage() {
         error={result.error}
         message={
           result.error.message ||
-          "INDIGO_KINTSUGI_CONNECTION_TIMEOUT: The sanctuary archives are currently unreachable."
+          "Um erro ocorreu ao buscar os dados do dashboard. Tente novamente mais tarde."
         }
       />
     );
