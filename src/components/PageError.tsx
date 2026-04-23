@@ -14,7 +14,7 @@ interface PageErrorProps {
 export function PageError({ error, reset, message }: PageErrorProps) {
   return (
     <ErrorContainer>
-      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center p-8 md:p-16 gap-16 lg:gap-24 w-full">
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center p-6 md:p-12 lg:p-16 gap-10 md:gap-16 lg:gap-24 w-full">
         <ErrorPageHero
           errorCode="500"
           titleLine1="SISTEMA"

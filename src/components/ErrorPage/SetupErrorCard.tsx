@@ -39,7 +39,7 @@ export function SetupErrorCard({
     return () => clearTimeout(timer);
   }, [currentIntegrity]);
   return (
-    <div className="relative z-10 w-full max-w-lg lg:max-w-sm">
+    <div className="relative z-10 w-full max-w-xl lg:max-w-sm">
       <div className="bg-black/40 backdrop-blur-xl border border-white/5 p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden relative group">
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-[#d4af37]/40 to-transparent" />
 
