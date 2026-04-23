@@ -1,17 +1,14 @@
 import { RecentAdditionCard } from "../cards/RecentAdditionCard";
 
-import { AnimeDetailResponse } from "@/services/api";
 import { NeonButtonRedirect } from "@/components/NeonButtonRedirect";
+import { IRecentAnimes } from "@/interfaces/IDashboard";
 
 interface RecentAdditionsListProps {
-  animes?: AnimeDetailResponse[] | null;
+  animes?: IRecentAnimes[] | null;
 }
 
 export function RecentAdditionsList({ animes }: RecentAdditionsListProps) {
-  const displayAnimes =
-    animes && animes.length > 0
-      ? (animes as unknown as AnimeDetailResponse[])
-      : [];
+  const displayAnimes = animes && animes.length > 0 ? animes : [];
 
   return (
     <section className="space-y-6">

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { AnimeDetailResponse } from "@/services/api";
 import { MonoText } from "../../MonoText";
+import { IRecentAnimes } from "@/interfaces/IDashboard";
 
 interface RecentAdditionCardProps {
-  anime: AnimeDetailResponse;
+  anime: IRecentAnimes;
 }
 
 export function RecentAdditionCard({ anime }: RecentAdditionCardProps) {

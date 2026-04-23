@@ -7,13 +7,13 @@ import { MonoText } from "@/components/MonoText";
 import { rankColors, rankTitles } from "@/app/(protected)/dashboard/rankTitles";
 import { cn } from "@/lib/utils";
 
-import { DashboardResponse } from "@/services/api";
-
 import { Rank } from "@/lib/jwt";
 import { IAnime } from "@/interfaces/IAnime";
+import { ITopics } from "@/interfaces/ITopics";
+import { IDashboardResponse } from "@/interfaces/IDashboard";
 
 interface DashboardPageHandlerProps {
-  dashboardData: DashboardResponse | null;
+  dashboardData: IDashboardResponse | null;
 }
 
 export function DashboardPageHandler({
@@ -65,7 +65,9 @@ export function DashboardPageHandler({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 xl:col-span-9 space-y-16">
           <RecentAdditionsList animes={dashboardData?.recentAnimes} />
-          <DiscourseFeed topics={dashboardData?.recentTopics} />
+          <DiscourseFeed
+            topics={dashboardData?.recentTopics as unknown as ITopics[]}
+          />
         </div>
 
         <div className="lg:col-span-4 xl:col-span-3">
