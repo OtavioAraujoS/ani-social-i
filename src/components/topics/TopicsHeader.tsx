@@ -15,7 +15,7 @@ export function TopicsHeader() {
       <motion.button
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.95 }}
-        className="cursor-pointer bg-primary text-white dark:text-on-primary px-8 py-5 rounded-full font-black text-xs uppercase tracking-widest text-center flex justify-center items-center gap-3 shadow-2xl"
+        className="cursor-pointer bg-primary-container text-white px-8 py-5 rounded-full font-black text-xs uppercase tracking-widest text-center flex justify-center items-center gap-3 shadow-2xl"
       >
         <SquarePen className="w-3 h-3" />
         Criar Tópico
