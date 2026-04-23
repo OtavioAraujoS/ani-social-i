@@ -13,6 +13,13 @@ export default async function CollectionsPage({
   const page = Number(params?.page) || 1;
   const title = typeof params?.title === "string" ? params.title : undefined;
   const limit = 10;
+  const statusMap: Record<string, "COMPLETED" | "RELEASING" | "PENDING"> = {
+    concluidos: "COMPLETED",
+    assistindo: "RELEASING",
+    pendente: "PENDING",
+  };
+  const status =
+    typeof params?.status === "string" ? statusMap[params.status] : undefined;
 
   const getCollectionsResult = async () => {
     try {
@@ -20,6 +27,7 @@ export default async function CollectionsPage({
         page,
         limit,
         title,
+        status,
       });
       return { data: response.data, isError: false as const };
     } catch (error) {
