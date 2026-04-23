@@ -21,7 +21,7 @@ export function ResidentItem({ anime }: ResidentItemProps) {
           />
         ) : (
           <div className="size-11 rounded-full bg-surface-container-high dark:bg-slate-800 border border-outline-variant dark:border-white/10 flex items-center justify-center text-xs font-bold text-zinc-900 dark:text-white overflow-hidden">
-            {anime?.updatedByUser.name.charAt(0)}
+            {anime?.updatedByUser?.name.charAt(0)}
           </div>
         )}
         <div
