@@ -4,7 +4,7 @@ import { AnimeListResponse } from "@/services/api";
 import Image from "next/image";
 import { Badge } from "../Badge";
 import { CollectionHeader } from "./CollectionHeader";
-import { CollectionFooter } from "./CollectionFooter";
+import { PaginationFooter } from "../PaginationFooter";
 import { CollectionDialogEdit } from "./CollectionDialogEdit";
 
 interface CollectionPageHandlerProps {
@@ -62,7 +62,7 @@ export function CollectionPageHandler({
             </p>
           </div>
         )}
-        <CollectionFooter
+        <PaginationFooter
           collectionLength={collectionsData.total}
           currentPage={currentPage}
           limit={limit}

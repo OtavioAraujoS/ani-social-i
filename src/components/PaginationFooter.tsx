@@ -3,17 +3,17 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-interface CollectionFooterProps {
+interface PaginationFooterProps {
   collectionLength: number;
   currentPage: number;
   limit: number;
 }
 
-export function CollectionFooter({
+export function PaginationFooter({
   collectionLength,
   currentPage,
   limit,
-}: CollectionFooterProps) {
+}: PaginationFooterProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -28,10 +28,36 @@ export function CollectionFooter({
     replace(`${pathname}?${params.toString()}`);
   };
 
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-
   const startEntry = collectionLength === 0 ? 0 : (currentPage - 1) * limit + 1;
   const endEntry = Math.min(currentPage * limit, collectionLength);
+
+  const getPageTokens = (): (number | "ellipsis-left" | "ellipsis-right")[] => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    const tokens: (number | "ellipsis-left" | "ellipsis-right")[] = [];
+    tokens.push(1, 2);
+
+    const windowStart = Math.max(3, currentPage - 1);
+    const windowEnd = Math.min(totalPages - 1, currentPage + 1);
+
+    if (windowStart > 3) {
+      tokens.push("ellipsis-left");
+    }
+
+    for (let p = windowStart; p <= windowEnd; p++) {
+      tokens.push(p);
+    }
+
+    if (windowEnd < totalPages - 1) {
+      tokens.push("ellipsis-right");
+    }
+
+    tokens.push(totalPages);
+    return tokens.filter((t, i, arr) => arr.indexOf(t) === i);
+  };
+
   return (
     <div className="mt-auto flex flex-col md:flex-row items-center justify-between gap-4 p-4 px-6 bg-white border border-[#eaedf1] rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] dark:bg-[#1a1c1e] dark:border-[#2d3135] dark:shadow-none transition-colors">
       <p className="text-[#8899a6] dark:text-[#94a3b8] text-sm font-medium">
@@ -47,19 +73,28 @@ export function CollectionFooter({
           <ChevronLeft className="w-4 h-4" />
         </button>
 
-        {pages.map((page) => (
-          <button
-            key={page}
-            onClick={() => handlePageChange(page)}
-            className={`w-8 h-8 flex items-center justify-center rounded-lg font-medium text-sm transition-colors ${
-              currentPage === page
-                ? "bg-[#5182ed] text-white shadow-sm"
-                : "bg-transparent hover:bg-[#f0f2f5] dark:hover:bg-[#2d3135] text-[#8899a6] dark:text-[#94a3b8] cursor-pointer"
-            }`}
-          >
-            {page}
-          </button>
-        ))}
+        {getPageTokens().map((token) =>
+          token === "ellipsis-left" || token === "ellipsis-right" ? (
+            <span
+              key={token}
+              className="w-8 h-8 flex items-center justify-center text-[#8899a6] dark:text-[#94a3b8] text-sm select-none"
+            >
+              …
+            </span>
+          ) : (
+            <button
+              key={token}
+              onClick={() => handlePageChange(token)}
+              className={`w-8 h-8 flex items-center justify-center rounded-lg font-medium text-sm transition-colors ${
+                currentPage === token
+                  ? "bg-[#5182ed] text-white shadow-sm"
+                  : "bg-transparent hover:bg-[#f0f2f5] dark:hover:bg-[#2d3135] text-[#8899a6] dark:text-[#94a3b8] cursor-pointer"
+              }`}
+            >
+              {token}
+            </button>
+          ),
+        )}
 
         <button
           onClick={() => handlePageChange(currentPage + 1)}
