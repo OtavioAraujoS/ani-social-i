@@ -761,6 +761,7 @@ export class Api<
         /** @format uuid */
         userId?: string;
         title?: string;
+        status?: "COMPLETED" | "RELEASING" | "PENDING";
       },
       params: RequestParams = {},
     ) =>
@@ -866,6 +867,12 @@ export class Api<
         page?: string | number;
         /** @default 20 */
         limit?: string | number;
+        title?: string;
+        status?: "COMPLETED" | "RELEASING" | "PENDING";
+        /** @format uuid */
+        animeId?: string;
+        /** @format uuid */
+        userId?: string;
       },
       params: RequestParams = {},
     ) =>
