@@ -153,31 +153,34 @@ export interface CreateTopic {
   animeId: string;
 }
 
-export type ListTopics = {
-  id: string;
-  title: string;
-  description: string;
-  animeInfos: {
+export interface ListTopics {
+  data: {
     id: string;
     title: string;
-    imageUrl: string | null;
-  };
-  createdByUserId: {
-    name: string;
-    userName: string;
-    rank: "S" | "A" | "B" | "C" | "D";
-    avatarUrl: string | null;
-  } | null;
-  updatedByUserId: {
-    name: string;
-    userName: string;
-    rank: "S" | "A" | "B" | "C" | "D";
-    avatarUrl: string | null;
-  } | null;
-  createdAt: date | string | number;
-  updatedAt: date | string | number;
-  comments: number;
-}[];
+    description: string;
+    animeInfos: {
+      id: string;
+      title: string;
+      imageUrl: string | null;
+    };
+    createdByUserId: {
+      name: string;
+      userName: string;
+      rank: "S" | "A" | "B" | "C" | "D";
+      avatarUrl: string | null;
+    } | null;
+    updatedByUserId: {
+      name: string;
+      userName: string;
+      rank: "S" | "A" | "B" | "C" | "D";
+      avatarUrl: string | null;
+    } | null;
+    createdAt: date | string | number;
+    updatedAt: date | string | number;
+    comments: number;
+  }[];
+  total: number;
+}
 
 export interface TopicResponse {
   id: string;
@@ -351,10 +354,8 @@ export interface ApiConfig<SecurityDataType = unknown> {
   customFetch?: typeof fetch;
 }
 
-export interface HttpResponse<
-  D extends unknown,
-  E extends unknown = unknown,
-> extends Response {
+export interface HttpResponse<D extends unknown, E extends unknown = unknown>
+  extends Response {
   data: D;
   error: E;
 }
@@ -557,18 +558,8 @@ export class HttpClient<SecurityDataType = unknown> {
               }
               return r;
             })
-            .catch(async (e) => {
-              if (responseFormat === "json") {
-                try {
-                  const text = await response.clone().text();
-                  r.error =
-                    typeof text === "string" && text.length > 0 ? text : e;
-                } catch {
-                  r.error = e;
-                }
-              } else {
-                r.error = e;
-              }
+            .catch((e) => {
+              r.error = e;
               return r;
             });
 
@@ -761,6 +752,7 @@ export class Api<
         /** @format uuid */
         userId?: string;
         title?: string;
+        status?: "COMPLETED" | "RELEASING" | "PENDING";
       },
       params: RequestParams = {},
     ) =>
@@ -866,6 +858,12 @@ export class Api<
         page?: string | number;
         /** @default 20 */
         limit?: string | number;
+        title?: string;
+        status?: "LATEST" | "POPULAR" | "NO_COMMENTS";
+        /** @format uuid */
+        animeId?: string;
+        /** @format uuid */
+        userId?: string;
       },
       params: RequestParams = {},
     ) =>

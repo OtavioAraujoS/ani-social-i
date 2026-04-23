@@ -4,7 +4,7 @@ import { AnimeListResponse } from "@/services/api";
 import Image from "next/image";
 import { Badge } from "../Badge";
 import { CollectionHeader } from "./CollectionHeader";
-import { CollectionFooter } from "./CollectionFooter";
+import { PaginationFooter } from "../PaginationFooter";
 import { CollectionDialogEdit } from "./CollectionDialogEdit";
 
 interface CollectionPageHandlerProps {
@@ -20,7 +20,7 @@ export function CollectionPageHandler({
 }: CollectionPageHandlerProps) {
   return (
     <div className="h-full flex flex-col bg-[#f4f6f8] dark:bg-[#0f1113] w-full pt-10 font-sans text-slate-800 dark:text-slate-200 transition-colors duration-300 selection:bg-[#5b87e5] selection:text-white">
-      <div className="flex flex-col flex-1 gap-10 w-full px-10 pb-6">
+      <div className="flex flex-col flex-1 gap-8 w-full px-10 pb-6">
         <CollectionHeader />
 
         {collectionsData && collectionsData.total > 0 ? (
@@ -62,7 +62,7 @@ export function CollectionPageHandler({
             </p>
           </div>
         )}
-        <CollectionFooter
+        <PaginationFooter
           collectionLength={collectionsData.total}
           currentPage={currentPage}
           limit={limit}

@@ -35,7 +35,7 @@ export function ErrorContainer({
         }}
       />
 
-      <header className="h-16 border-b border-white/5 px-8 flex items-center justify-between bg-black/40 backdrop-blur-md relative z-50">
+      <header className="h-14 sm:h-16 border-b border-white/5 px-4 sm:px-8 flex items-center justify-between bg-black/40 backdrop-blur-md relative z-50">
         <div className="flex items-center gap-2">
           <div className="w-5 h-5 border border-[#00f0ff] flex items-center justify-center shadow-[0_0_8px_rgba(0,240,255,0.3)]">
             <div className="w-2 h-2 bg-[#00f0ff]" />

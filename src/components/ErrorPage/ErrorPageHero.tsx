@@ -34,7 +34,7 @@ export function ErrorPageHero({
         </MonoText>
       </div>
 
-      <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter uppercase mb-8 md:mb-12">
+      <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter uppercase mb-6 md:mb-12">
         <span className="block text-white">{titleLine1}</span>
         <span className="block bg-linear-to-r from-[#d4af37] via-[#f8e7b0] to-[#b8860b] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">
           {titleLine2}

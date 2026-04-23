@@ -1,9 +1,9 @@
-import { CollectionPageHandler } from "@/components/Collection/CollectionPageHandler";
 import { PageError } from "@/components/PageError";
+import { TopicPageHandler } from "@/components/topics/TopicPageHandler";
 import { apiClient, getApiError } from "@/services/apiClient";
 import { handleUnauthorizedServer } from "@/services/authUtils";
 
-export default async function CollectionsPage({
+export default async function TopicsPage({
   searchParams,
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
@@ -11,22 +11,26 @@ export default async function CollectionsPage({
   const params = await searchParams;
 
   const page = Number(params?.page) || 1;
-  const title = typeof params?.title === "string" ? params.title : undefined;
+  const searchtitle =
+    typeof params?.search === "string" ? params.search : undefined;
   const limit = 10;
-  const statusMap: Record<string, "COMPLETED" | "RELEASING" | "PENDING"> = {
-    concluidos: "COMPLETED",
-    assistindo: "RELEASING",
-    pendente: "PENDING",
+  const statusMap: Record<string, "LATEST" | "POPULAR" | "NO_COMMENTS"> = {
+    recentes: "LATEST",
+    popular: "POPULAR",
+    "sem-resposta": "NO_COMMENTS",
+    LATEST: "LATEST",
+    POPULAR: "POPULAR",
+    NO_COMMENTS: "NO_COMMENTS",
   };
   const status =
-    typeof params?.status === "string" ? statusMap[params.status] : undefined;
+    typeof params?.orderBy === "string" ? statusMap[params.orderBy] : undefined;
 
-  const getCollectionsResult = async () => {
+  const getTopicsResult = async () => {
     try {
-      const response = await apiClient.social.getSocialAnimes({
+      const response = await apiClient.social.getSocialTopics({
         page,
         limit,
-        title,
+        title: searchtitle,
         status,
       });
       return { data: response.data, isError: false as const };
@@ -44,21 +48,23 @@ export default async function CollectionsPage({
     }
   };
 
-  const result = await getCollectionsResult();
+  const result = await getTopicsResult();
   if (result.isError) {
     return (
       <PageError
         error={result.error}
         message={
           result.error.message ||
-          "Um erro ocorreu ao buscar os dados das coleções. Tente novamente mais tarde."
+          "Um erro ocorreu ao buscar os dados dos tópicos. Tente novamente mais tarde."
         }
       />
     );
   }
+  const { data: topics, total: totalTopics } = result.data;
   return (
-    <CollectionPageHandler
-      collectionsData={result.data}
+    <TopicPageHandler
+      topics={topics}
+      totalTopics={totalTopics}
       currentPage={page}
       limit={limit}
     />

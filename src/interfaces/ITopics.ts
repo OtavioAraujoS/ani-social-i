@@ -2,15 +2,18 @@ export interface ITopics {
   id: string;
   title: string;
   description: string;
-  animeId: string;
-  comments: number;
-  createdByUser: {
+  animeInfos: {
+    id: string;
+    title: string;
+    imageUrl: string | null;
+  };
+  createdByUserId: {
     name: string;
     userName: string;
     rank: "S" | "A" | "B" | "C" | "D";
     avatarUrl: string | null;
   } | null;
-  updatedByUser: {
+  updatedByUserId: {
     name: string;
     userName: string;
     rank: "S" | "A" | "B" | "C" | "D";
@@ -18,4 +21,5 @@ export interface ITopics {
   } | null;
   createdAt: Date | string | number;
   updatedAt: Date | string | number;
+  comments: number;
 }
