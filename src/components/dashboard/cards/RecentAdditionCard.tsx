@@ -17,6 +17,7 @@ export function RecentAdditionCard({ anime }: RecentAdditionCardProps) {
         className="object-cover transition-transform duration-500 group-hover:scale-110"
         priority
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        unoptimized
       />
 
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-black/90 via-black/40 to-transparent transition-opacity group-hover:from-black/95" />

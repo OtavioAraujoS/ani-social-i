@@ -17,6 +17,7 @@ export function ResidentItem({ anime }: ResidentItemProps) {
             alt={anime?.updatedByUser?.name}
             width={56}
             height={56}
+            unoptimized
             className="size-11 rounded-full bg-surface-container-high dark:bg-slate-800 border border-outline-variant dark:border-white/10 flex items-center justify-center text-xs font-bold text-zinc-900 dark:text-white overflow-hidden"
           />
         ) : (
