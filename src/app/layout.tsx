@@ -13,6 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Ani Social",
   description: "Social Network for Anime Lovers",
+  referrer: "no-referrer",
 };
 
 export default function RootLayout({
