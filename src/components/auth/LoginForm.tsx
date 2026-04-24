@@ -81,6 +81,7 @@ export function LoginForm() {
               <Link
                 className="text-[#416be8] font-black hover:underline"
                 href="/register"
+                prefetch={false}
               >
                 clicando aqui
               </Link>
