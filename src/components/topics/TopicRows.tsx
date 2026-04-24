@@ -30,6 +30,7 @@ export function TopicRow({ topic }: { topic: ITopics }) {
               alt={topic.createdByUserId?.name}
               width={40}
               height={40}
+              unoptimized
             />
           ) : (
             <User className="w-3 h-3 text-slate-500" />

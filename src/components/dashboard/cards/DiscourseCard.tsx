@@ -27,6 +27,7 @@ export function DiscourseCard({ topic }: { topic: ITopics }) {
       <div className="flex items-center pt-2">
         <Link
           href={`/dashboard/topicos/${topic?.id}`}
+          prefetch={false}
           className="text-[10px] uppercase tracking-widest text-cyan-600 dark:text-cyan-500/60 hover:text-cyan-500 dark:hover:text-cyan-400 font-bold transition-colors"
         >
           Acessar Tópico →

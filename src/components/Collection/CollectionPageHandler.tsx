@@ -39,6 +39,7 @@ export function CollectionPageHandler({
                       loading="lazy"
                       width={500}
                       height={750}
+                      unoptimized
                     />
                   </CollectionDialogEdit>
                   <Badge status={anime.status} />

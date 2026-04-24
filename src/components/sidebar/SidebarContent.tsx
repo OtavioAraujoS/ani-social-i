@@ -31,7 +31,7 @@ export function SidebarContent() {
                     isActive && "app-sidebar__nav-item--active",
                   )}
                 >
-                  <Link href={item.href}>
+                  <Link href={item.href} prefetch={false}>
                     <item.icon
                       className={cn(
                         "shrink-0 transition-colors",

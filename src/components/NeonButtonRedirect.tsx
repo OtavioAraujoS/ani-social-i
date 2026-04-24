@@ -32,6 +32,7 @@ export function NeonButtonRedirect({
         variant.bg,
         "cursor-pointer",
       )}
+      prefetch={false}
     >
       <div className={cn("h-4 w-px", variant.line)} />
       <div

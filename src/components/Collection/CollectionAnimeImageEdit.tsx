@@ -97,6 +97,7 @@ export function CollectionAnimeImageEdit({
           fill
           className="object-cover"
           loading="lazy"
+          unoptimized
         />
 
         <div className="absolute top-4 left-4 space-y-2">

@@ -30,7 +30,7 @@ export default function HomeLayout({
 
       <header className="fixed top-0 left-0 right-0 z-50 w-full p-6 pointer-events-none">
         <div className="max-w-7xl mx-auto w-full bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-2xl rounded-2xl px-6 md:px-12 py-3 md:py-4 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 pointer-events-auto">
-          <Link href="/home">
+          <Link href="/home" prefetch={false}>
             <div className="text-slate-900 dark:text-white text-xl md:text-2xl font-black tracking-tighter uppercase">
               Ani/Social
             </div>
@@ -42,6 +42,7 @@ export default function HomeLayout({
                 <Link
                   href={item.link}
                   className="hover:text-slate-900 dark:hover:text-white transition-colors px-3 py-1"
+                  prefetch={false}
                 >
                   {item.title}
                 </Link>
@@ -55,7 +56,7 @@ export default function HomeLayout({
           <div className="flex items-center gap-4">
             <ThemeSwitch />
 
-            <Link href="/login">
+            <Link href="/login" prefetch={false}>
               <Button
                 asChild
                 className="cursor-pointer rounded-full px-6 py-2 transition-all backdrop-blur-md uppercase text-[10px] font-bold tracking-wider

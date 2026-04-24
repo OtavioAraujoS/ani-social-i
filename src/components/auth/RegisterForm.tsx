@@ -106,6 +106,7 @@ export function RegisterForm() {
               <Link
                 className="text-[#59e054] font-black hover:underline"
                 href="/login"
+                prefetch={false}
               >
                 Fazer login
               </Link>
