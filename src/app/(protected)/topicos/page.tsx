@@ -3,6 +3,11 @@ import { TopicPageHandler } from "@/components/topics/TopicPageHandler";
 import { apiClient, getApiError } from "@/services/apiClient";
 import { handleUnauthorizedServer } from "@/services/authUtils";
 
+export const metadata = {
+  title: "Tópicos - AniSocial",
+  description: "Participe das discussões sobre seus animes favoritos.",
+};
+
 export default async function TopicsPage({
   searchParams,
 }: {

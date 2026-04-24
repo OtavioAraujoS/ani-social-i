@@ -3,6 +3,11 @@ import { PageError } from "@/components/PageError";
 import { apiClient, getApiError } from "@/services/apiClient";
 import { handleUnauthorizedServer } from "@/services/authUtils";
 
+export const metadata = {
+  title: "Coleções - AniSocial",
+  description: "Gerencie suas coleções de animes.",
+};
+
 export default async function CollectionsPage({
   searchParams,
 }: {

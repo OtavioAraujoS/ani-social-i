@@ -1,6 +1,11 @@
 import { LoginHero } from "@/components/auth/LoginHero";
 import { LoginForm } from "@/components/auth/LoginForm";
 
+export const metadata = {
+  title: "Login - AniSocial",
+  description: "Faça login na sua conta para começar.",
+};
+
 export default function LoginPage() {
   return (
     <main className="min-h-dvh md:min-h-screen flex flex-col md:flex-row overflow-y-auto md:overflow-hidden bg-[#191c1d] text-[#f8f9fa] selection:bg-[#416be8]/30">
