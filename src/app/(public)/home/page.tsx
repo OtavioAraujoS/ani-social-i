@@ -3,6 +3,11 @@ import { projectFeatures } from "@/utils/projectFunctions";
 import Image from "next/image";
 import { ThreeColumnLayout } from "@/components/ThreeColumnLayout";
 
+export const metadata = {
+  title: "Home - AniSocial",
+  description: "Comunidade de amantes de animes",
+};
+
 export default function Home() {
   const leftContent = (
     <>

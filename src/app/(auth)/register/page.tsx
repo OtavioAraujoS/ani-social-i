@@ -1,6 +1,12 @@
 import { RegisterHero } from "@/components/auth/RegisterHero";
 import { RegisterForm } from "@/components/auth/RegisterForm";
 
+export const metadata = {
+  title: "Registro - AniSocial",
+  description:
+    "Registre-se no AniSocial e faça parte da comunidade de amantes de animes.",
+};
+
 export default function RegisterPage() {
   return (
     <main className="min-h-dvh md:min-h-screen flex flex-col md:flex-row overflow-y-auto md:overflow-hidden bg-[#0c0e0f] text-[#f8f9fa] selection:bg-[#416be8]/30">

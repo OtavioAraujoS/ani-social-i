@@ -3,6 +3,11 @@ import { apiClient, getApiError } from "@/services/apiClient";
 import { PageError } from "@/components/PageError";
 import { handleUnauthorizedServer } from "@/services/authUtils";
 
+export const metadata = {
+  title: "Dashboard - AniSocial",
+  description: "Seu painel personalizado com suas coleções e atividades.",
+};
+
 export default async function DashboardPage() {
   const getDashboardResult = async () => {
     try {

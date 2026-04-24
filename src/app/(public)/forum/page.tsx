@@ -3,6 +3,11 @@ import Image from "next/image";
 import { ThreeColumnLayout } from "@/components/ThreeColumnLayout";
 import { forumFeatures } from "@/utils/projectFunctions";
 
+export const metadata = {
+  title: "Fórum - AniSocial",
+  description: "Plataforma onde discussões ganham vida e ideias se conectam",
+};
+
 export default function ForumHomePage() {
   const leftContent = (
     <>

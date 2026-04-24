@@ -3,6 +3,12 @@ import { animesFeatures } from "@/utils/projectFunctions";
 import Image from "next/image";
 import { ThreeColumnLayout } from "@/components/ThreeColumnLayout";
 
+export const metadata = {
+  title: "Animes - AniSocial",
+  description:
+    "Descubra novos animes, explore o catálogo e encontre seus títulos favoritos.",
+};
+
 export default function AnimesHomePage() {
   const leftContent = (
     <>
