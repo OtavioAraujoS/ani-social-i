@@ -1,10 +1,24 @@
 import { PlusCircle } from "lucide-react";
+import { forwardRef } from "react";
+import { cn } from "@/lib/utils";
 
-export function RegisterButton({ title }: { title: string }) {
+export const RegisterButton = forwardRef<
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement> & { title: string }
+>(({ title, className, ...props }, ref) => {
   return (
-    <button className="cursor-pointer flex items-center gap-2 bg-linear-to-r from-[#5273a4] to-[#1c3d74] dark:from-[#1c61d8] dark:to-[#113074] hover:opacity-90 transition-opacity text-white px-6 py-3.5 rounded-full font-semibold shadow-lg shadow-blue-500/20 dark:shadow-blue-900/20 shrink-0 w-full md:w-auto justify-center">
+    <button
+      ref={ref}
+      {...props}
+      className={cn(
+        "cursor-pointer flex items-center gap-2 bg-linear-to-r from-[#5273a4] to-[#1c3d74] dark:from-[#1c61d8] dark:to-[#113074] hover:opacity-90 transition-opacity text-white px-6 py-3.5 rounded-full font-semibold shadow-lg shadow-blue-500/20 dark:shadow-blue-900/20 shrink-0 w-full md:w-auto justify-center",
+        className
+      )}
+    >
       <PlusCircle className="w-5 h-5 text-white/90" />
       {title}
     </button>
   );
-}
+});
+
+RegisterButton.displayName = "RegisterButton";
