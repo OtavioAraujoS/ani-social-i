@@ -10,9 +10,12 @@ interface CommentSectionProps {
 
 export const CommentSection = ({ comments }: CommentSectionProps) => {
   return (
-    <div className="space-y-12">
+    <div className="flex flex-col gap-6">
       {comments.map((comment) => (
-        <div className="flex gap-6 group" key={comment.id}>
+        <div
+          className="flex gap-6 group border rounded-xl p-4 border-white/300 dark:border-gray-700"
+          key={comment.id}
+        >
           <Image
             src={comment.createdByUserId?.avatarUrl || "/notFoundPicture.png"}
             alt={comment.createdByUserId?.userName || ""}
