@@ -8,7 +8,9 @@ export function TopicRow({ topic }: { topic: ITopics }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ backgroundColor: "rgba(15, 23, 42, 0.6)" }}
+      whileHover={{
+        scale: 1.01,
+      }}
       className="glass-panel group transition-all duration-100 rounded-xl p-4 md:px-8 md:py-6 grid grid-cols-12 items-center gap-4 cursor-pointer"
     >
       <div className="col-span-12 md:col-span-6">
