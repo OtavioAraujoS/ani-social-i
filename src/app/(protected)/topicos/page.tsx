@@ -72,8 +72,10 @@ export default async function TopicsPage({
     }
   };
 
-  const animeListResult = await getAnimeResult();
-  const topicListResult = await getTopicsResult();
+  const [topicListResult, animeListResult] = await Promise.all([
+    getTopicsResult(),
+    getAnimeResult(),
+  ]);
 
   if (topicListResult.isError || animeListResult.isError) {
     const error =
@@ -93,7 +95,6 @@ export default async function TopicsPage({
 
   const { data: topics, total: totalTopics } = topicListResult.data;
   const animes = animeListResult.data as IAnime[];
-
   return (
     <TopicPageHandler
       topics={topics}
