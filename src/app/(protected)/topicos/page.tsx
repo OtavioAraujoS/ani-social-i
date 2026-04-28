@@ -1,5 +1,6 @@
 import { PageError } from "@/components/PageError";
 import { TopicPageHandler } from "@/components/topics/TopicPageHandler";
+import { IAnime } from "@/interfaces/IAnime";
 import { apiClient, getApiError } from "@/services/apiClient";
 import { handleUnauthorizedServer } from "@/services/authUtils";
 
@@ -53,25 +54,53 @@ export default async function TopicsPage({
     }
   };
 
-  const result = await getTopicsResult();
-  if (result.isError) {
+  const getAnimeResult = async () => {
+    try {
+      const response = await apiClient.social.getSocialAnimes();
+      return { data: response.data.data || [], isError: false as const };
+    } catch (error) {
+      const apiError = getApiError(error);
+
+      if (apiError.status === 401) {
+        await handleUnauthorizedServer();
+      }
+
+      return {
+        error: apiError,
+        isError: true as const,
+      };
+    }
+  };
+
+  const animeListResult = await getAnimeResult();
+  const topicListResult = await getTopicsResult();
+
+  if (topicListResult.isError || animeListResult.isError) {
+    const error =
+      (topicListResult.isError ? topicListResult.error : null) ||
+      (animeListResult.isError ? animeListResult.error : null);
+
     return (
       <PageError
-        error={result.error}
+        error={error!}
         message={
-          result.error.message ||
-          "Um erro ocorreu ao buscar os dados dos tópicos. Tente novamente mais tarde."
+          error?.message ||
+          "Um erro ocorreu ao buscar os dados. Tente novamente mais tarde."
         }
       />
     );
   }
-  const { data: topics, total: totalTopics } = result.data;
+
+  const { data: topics, total: totalTopics } = topicListResult.data;
+  const animes = animeListResult.data as IAnime[];
+
   return (
     <TopicPageHandler
       topics={topics}
       totalTopics={totalTopics}
       currentPage={page}
       limit={limit}
+      animes={animes}
     />
   );
 }

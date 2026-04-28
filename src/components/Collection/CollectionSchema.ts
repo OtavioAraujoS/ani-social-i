@@ -32,3 +32,13 @@ export const CreateAnimeSchema = z.object({
 });
 
 export type CreateAnime = z.infer<typeof CreateAnimeSchema>;
+
+export const CollectionDefaultValues: CreateAnime = {
+  title: "",
+  description: "",
+  episodes: 0,
+  review: "",
+  stars: 5,
+  imageUrl: "",
+  status: "PENDING",
+};

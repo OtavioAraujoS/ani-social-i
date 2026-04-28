@@ -3,7 +3,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { apiClient, getApiError } from "@/services/apiClient";
 import { CollectionFields } from "./CollectionFields";
-import { CreateAnimeSchema, type CreateAnime } from "./CollectionSchema";
+import {
+  CollectionDefaultValues,
+  CreateAnimeSchema,
+  type CreateAnime,
+} from "./CollectionSchema";
 import { toast } from "sonner";
 import { AlertError } from "../Alert";
 import { UpdateAnime } from "@/services/api";
@@ -17,16 +21,6 @@ interface CollectionFormProps {
   setIsLoading: (isLoading: boolean) => void;
 }
 
-const DEFAULT_VALUES: CreateAnime = {
-  title: "",
-  description: "",
-  episodes: 0,
-  review: "",
-  stars: 5,
-  imageUrl: "",
-  status: "PENDING",
-};
-
 export function CollectionForm({
   initialData,
   isEditing = false,
@@ -36,7 +30,7 @@ export function CollectionForm({
   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(CreateAnimeSchema),
-    defaultValues: initialData || DEFAULT_VALUES,
+    defaultValues: initialData || CollectionDefaultValues,
   });
   const { handleSubmit } = form;
 

@@ -5,6 +5,7 @@ import { TopicsHeader } from "@/components/topics/TopicsHeader";
 import { TopicRow } from "@/components/topics/TopicRows";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ITopics } from "@/interfaces/ITopics";
+import { IAnime } from "@/interfaces/IAnime";
 
 const topicsFilter: IFilterList[] = [
   {
@@ -26,6 +27,7 @@ interface TopicPageHandlerProps {
   totalTopics: number;
   currentPage: number;
   limit: number;
+  animes: IAnime[];
 }
 
 export function TopicPageHandler({
@@ -33,6 +35,7 @@ export function TopicPageHandler({
   totalTopics,
   currentPage,
   limit,
+  animes,
 }: TopicPageHandlerProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -61,7 +64,7 @@ export function TopicPageHandler({
   };
   return (
     <main className="flex-1 space-y-8 md:space-y-12 p-10 lg:p-12 overflow-y-auto">
-      <TopicsHeader />
+      <TopicsHeader animes={animes} />
 
       <PagesFilter
         filterList={topicsFilter}
