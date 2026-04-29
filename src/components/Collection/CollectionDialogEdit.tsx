@@ -1,15 +1,9 @@
 "use client";
-import { DialogTitleStyled } from "../DialogTitleStyled";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
 import { CollectionForm } from "./CollectionForm";
 import { IAnime } from "@/interfaces/IAnime";
 import { CollectionAnimeImageEdit } from "./CollectionAnimeImageEdit";
 import { useState } from "react";
+import { StyledDialog } from "../StyledDialog";
 
 interface CollectionDialogEditProps {
   anime: IAnime;
@@ -31,34 +25,29 @@ export function CollectionDialogEdit({
     status: anime.status ?? "PENDING",
   };
   return (
-    <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="md:max-w-7xl w-[calc(100%-2rem)] p-0 overflow-y-auto">
-        <DialogTitle className="sr-only">Editar Anime</DialogTitle>
-        <DialogTitleStyled
-          title="Modulo de Anime"
-          description="Editar"
-          descriptionReason="Anime"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-10 overflow-y-auto px-6">
-            <div className="col-span-1 md:col-span-3">
-              <CollectionForm
-                initialData={animeForm}
-                isEditing={true}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-              />
-            </div>
-            <div className="col-span-1 md:col-span-2">
-              <CollectionAnimeImageEdit
-                anime={anime}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-              />
-            </div>
-          </div>
-        </DialogTitleStyled>
-      </DialogContent>
-    </Dialog>
+    <StyledDialog
+      title="Modulo de Anime"
+      description="Atualizar"
+      descriptionReason="Anime"
+      childrenButton={children}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-10 overflow-y-auto px-6">
+        <div className="col-span-1 md:col-span-2">
+          <CollectionAnimeImageEdit
+            anime={anime}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
+        </div>
+        <div className="col-span-1 md:col-span-3">
+          <CollectionForm
+            initialData={animeForm}
+            isEditing={true}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
+        </div>
+      </div>
+    </StyledDialog>
   );
 }
