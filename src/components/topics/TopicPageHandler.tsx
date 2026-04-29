@@ -87,14 +87,24 @@ export function TopicPageHandler({
           <div className="col-span-6">Título do Tópico</div>
           <div className="col-span-2">Criado por</div>
           <div className="col-span-3 text-center">Anime</div>
-          <div className="col-span-1 text-right">Respostas</div>
+          <div className="hidden lg:block col-span-1 text-right">Respostas</div>
           {userIsAdmin && <div className="col-span-1 text-right">Ações</div>}
         </div>
 
         <div>
-          {topics.map((topic) => (
-            <TopicRow key={topic.id} topic={topic} userIsAdmin={userIsAdmin} />
-          ))}
+          {topics.length === 0 ? (
+            <div className="flex items-center justify-center">
+              <p>Nenhum tópico encontrado</p>
+            </div>
+          ) : (
+            topics.map((topic) => (
+              <TopicRow
+                key={topic.id}
+                topic={topic}
+                userIsAdmin={userIsAdmin}
+              />
+            ))
+          )}
         </div>
       </div>
 
