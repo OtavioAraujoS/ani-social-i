@@ -23,7 +23,7 @@ export function StyledDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>{childrenButton}</DialogTrigger>
-      <DialogContent className="md:max-w-7xl w-[calc(100%-2rem)] p-0 overflow-hidden">
+      <DialogContent className="md:max-w-7xl w-[calc(100%-2rem)] p-0 overflow-y-auto">
         <DialogTitle className="sr-only">{title}</DialogTitle>
         <DialogDescription className="sr-only">
           {descriptionReason}
