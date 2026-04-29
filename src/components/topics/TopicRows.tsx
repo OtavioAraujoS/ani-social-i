@@ -1,10 +1,16 @@
 import { ITopics } from "@/interfaces/ITopics";
-import { User, MessageCircle } from "lucide-react";
+import { User, MessageCircle, Trash, Pencil } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 
-export function TopicRow({ topic }: { topic: ITopics }) {
+export function TopicRow({
+  topic,
+  userIsAdmin,
+}: {
+  topic: ITopics;
+  userIsAdmin: boolean;
+}) {
   return (
     <Link href={`/topicos/${topic.id}`}>
       <motion.div
@@ -13,7 +19,9 @@ export function TopicRow({ topic }: { topic: ITopics }) {
         whileHover={{
           scale: 1.01,
         }}
-        className="glass-panel group transition-all duration-100 rounded-xl p-4 md:px-8 md:py-6 grid grid-cols-12 items-center gap-4 cursor-pointer"
+        className={`glass-panel group transition-all duration-100 rounded-xl p-4 md:px-8 md:py-6 grid items-center gap-4 cursor-pointer ${
+          userIsAdmin ? "grid-cols-12 md:grid-cols-13" : "grid-cols-12"
+        }`}
       >
         <div className="col-span-12 md:col-span-6">
           <div className="flex items-center gap-4">
@@ -25,7 +33,7 @@ export function TopicRow({ topic }: { topic: ITopics }) {
             </h3>
           </div>
         </div>
-        <div className="col-span-6 md:col-span-2 flex items-center gap-2">
+        <div className="col-span-12 md:col-span-2 flex items-center gap-2">
           <div className="size-8 md:size-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-white/70 dark:border-white/50">
             {topic.createdByUserId?.avatarUrl ? (
               <Image
@@ -44,17 +52,27 @@ export function TopicRow({ topic }: { topic: ITopics }) {
             {topic.createdByUserId?.name}
           </span>
         </div>
-        <div className="col-span-6 md:col-span-3 flex justify-center">
+        <div className="col-span-12 md:col-span-3 flex justify-center">
           <span className="px-3 py-1 bg-primary/10 text-primary border-l border-primary text-[9px] font-black uppercase tracking-widest leading-none">
             {topic.animeInfos.title}
           </span>
         </div>
-        <div className="col-span-12 md:col-span-1 flex items-center justify-end gap-2 text-slate-500">
+        <div className={`${userIsAdmin ? "col-span-6" : "col-span-12"} md:col-span-1 flex items-center justify-end gap-2 text-slate-500`}>
           <span className="text-xs md:text-[1rem] font-bold">
             {topic.comments}
           </span>
           <MessageCircle className="w-4 h-4" />
         </div>
+        {userIsAdmin && (
+          <div className="col-span-6 md:col-span-1 flex items-center justify-end gap-4">
+            <button className="text-yellow-500 hover:text-yellow-600 transition-colors">
+              <Pencil className="w-5 h-5" />
+            </button>
+            <button className="text-red-500 hover:text-red-600 transition-colors">
+              <Trash className="w-5 h-5" />
+            </button>
+          </div>
+        )}
       </motion.div>
     </Link>
   );

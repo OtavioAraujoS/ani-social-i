@@ -6,6 +6,7 @@ import { TopicRow } from "@/components/topics/TopicRows";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ITopics } from "@/interfaces/ITopics";
 import { IAnime } from "@/interfaces/IAnime";
+import { useAuth } from "@/providers/AuthProvider";
 
 const topicsFilter: IFilterList[] = [
   {
@@ -37,9 +38,12 @@ export function TopicPageHandler({
   limit,
   animes,
 }: TopicPageHandlerProps) {
+  const { user } = useAuth();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+
+  const userIsAdmin = user?.role === "ADMIN";
 
   const handleSearch = (searchTerm: string) => {
     const params = new URLSearchParams(searchParams);
@@ -75,16 +79,21 @@ export function TopicPageHandler({
       />
 
       <div className="space-y-4 relative z-10">
-        <div className="hidden md:grid grid-cols-12 px-8 py-2 text-slate-500 font-black uppercase text-[10px] tracking-widest">
+        <div
+          className={`hidden md:grid px-8 py-2 text-slate-500 font-black uppercase text-[10px] tracking-widest gap-4 ${
+            userIsAdmin ? "grid-cols-13" : "grid-cols-12"
+          }`}
+        >
           <div className="col-span-6">Título do Tópico</div>
           <div className="col-span-2">Criado por</div>
           <div className="col-span-3 text-center">Anime</div>
           <div className="col-span-1 text-right">Respostas</div>
+          {userIsAdmin && <div className="col-span-1 text-right">Ações</div>}
         </div>
 
-        <div className="space-y-3">
+        <div>
           {topics.map((topic) => (
-            <TopicRow key={topic.id} topic={topic} />
+            <TopicRow key={topic.id} topic={topic} userIsAdmin={userIsAdmin} />
           ))}
         </div>
       </div>

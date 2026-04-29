@@ -41,6 +41,8 @@
   --color-sidebar-foreground: var(--sidebar-foreground);
 
   --color-sidebar: var(--sidebar);
+
+  --grid-template-columns-13: repeat(13, minmax(0, 1fr));
 }
 
 :root {
