@@ -24,7 +24,7 @@ export const IndividualTopicPageHandler = ({
       </div>
 
       <main className="xl:pl-64 pt-20 min-h-screen relative z-10">
-        <div className="max-w-7xl mx-auto px-4 md:px-12 py-12">
+        <div className="w-full px-4 md:px-12 py-12">
           <CommentsTopicHeader topic={topic} />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
