@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "../ui/label";
 import { IAnime } from "@/interfaces/IAnime";
+import { DialogButtons } from "../DialogButtons";
 
 interface TopicFieldsProps {
   form: UseFormReturn<CreateTopic>;
@@ -105,33 +106,15 @@ export const TopicFields = ({
         )}
       </div>
 
-      <div className="flex gap-5 justify-end mt-5">
-        {isEditing && (
-          <button
-            type="button"
-            disabled={isLoading}
-            onClick={removeTopic}
-            className="cursor-pointer bg-red-700 dark:bg-red-800 text-white px-8 py-3 rounded-lg font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-red-600 dark:hover:bg-red-700 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading ? "Removendo..." : "Remover Tópico"}
-            <Trash size={16} />
-          </button>
-        )}
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="cursor-pointer bg-primary dark:bg-blue-900 text-white px-8 py-3 rounded-lg font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-blue-600 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isLoading
-            ? isEditing
-              ? "Atualizando..."
-              : "Salvando..."
-            : isEditing
-              ? "Atualizar Tópico"
-              : "Salvar Tópico"}
-          <PlusSquare size={16} />
-        </button>
-      </div>
+      <DialogButtons
+        isEditing={isEditing}
+        isLoading={isLoading}
+        functionButton={removeTopic}
+        deleteButtonTitle="Remover Tópico"
+        deleteButtonIcon={<Trash size={16} />}
+        saveButtonTitle="Salvar Tópico"
+        saveButtonIcon={<PlusSquare size={16} />}
+      />
     </div>
   );
 };
