@@ -102,6 +102,7 @@ export function TopicPageHandler({
                 key={topic.id}
                 topic={topic}
                 userIsAdmin={userIsAdmin}
+                animes={animes ?? []}
               />
             ))
           )}

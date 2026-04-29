@@ -1,16 +1,19 @@
 import { ITopics } from "@/interfaces/ITopics";
-import { User, MessageCircle, Pencil } from "lucide-react";
+import { User, MessageCircle } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { DeleteTopicDialog } from "./DeleteTopicDialog";
+import { TopicEditDialog } from "./TopicEditDialog";
+import { IAnime } from "@/interfaces/IAnime";
 
 export function TopicRow({
   topic,
   userIsAdmin,
+  animes,
 }: {
   topic: ITopics;
   userIsAdmin: boolean;
+  animes: IAnime[];
 }) {
   return (
     <motion.div
@@ -69,10 +72,15 @@ export function TopicRow({
       </div>
       {userIsAdmin && (
         <div className="col-span-6 md:col-span-1 flex items-center justify-end gap-4">
-          <button className="text-yellow-500 hover:text-yellow-600 transition-colors">
-            <Pencil className="w-5 h-5" />
-          </button>
-          <DeleteTopicDialog topicId={topic.id} />
+          <TopicEditDialog
+            topicId={topic.id}
+            initialData={{
+              title: topic?.title ?? "",
+              description: topic?.description ?? "",
+              animeId: topic?.animeInfos?.id ?? "",
+            }}
+            animes={animes ?? []}
+          />
         </div>
       )}
     </motion.div>
