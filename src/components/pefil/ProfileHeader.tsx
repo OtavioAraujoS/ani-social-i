@@ -9,8 +9,8 @@ export function ProfileHeader({
   profileInfos: IProfileUserInfos;
 }) {
   return (
-    <div className="flex flex-col md:flex-row items-end justify-between gap-12">
-      <div className="flex items-center gap-12">
+    <div className="flex flex-wrap justify-between gap-6">
+      <div className="flex flex-wrap items-center gap-12">
         <div className="relative">
           <div className="w-48 h-48 rounded-2xl overflow-hidden border-4 border-white/10 glass-panel p-1 relative z-10">
             <Image
@@ -34,21 +34,19 @@ export function ProfileHeader({
             {rankTitles[profileInfos?.rank as keyof typeof rankTitles]}
           </p>
           <div className="massive-display uppercase flex flex-col -ml-2">
-            <span className="text-slate-600 dark:text-white text-[4.2rem]">
+            <span className="text-slate-600 dark:text-white text-[3rem] lg:text-[4.2rem]">
               {profileInfos?.username}
             </span>
-            <span className="text-blue-primary -mt-4 text-[4rem]">
+            <span className="text-blue-primary -mt text-[2rem] lg:text-[4rem]">
               {profileInfos?.name}
             </span>
           </div>
         </div>
       </div>
 
-      <div className="flex">
-        <button className="cursor-pointer text-white bg-blue-primary hover:bg-blue-accent dark:bg-blue-accent dark:hover:bg-blue-primary px-8 py-3 glass-panel transition-all font-bold tracking-widest text-[10px] inner-glow">
-          EDITAR PERFIL
-        </button>
-      </div>
+      <button className="w-fit max-h-32 self-center cursor-pointer text-white bg-blue-primary hover:bg-blue-accent dark:bg-blue-accent dark:hover:bg-blue-primary px-8 py-3 glass-panel transition-all font-bold tracking-widest text-[10px] inner-glow">
+        EDITAR PERFIL
+      </button>
     </div>
   );
 }

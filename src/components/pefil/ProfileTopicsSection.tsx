@@ -13,7 +13,7 @@ export function ProfileTopicsSection({
           Tópicos <span className="text-blue-primary">Criados</span>
         </h2>
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4">
         {topicsInfos.map((topic) => (
           <Link
             href={`/topicos/${topic.id}`}

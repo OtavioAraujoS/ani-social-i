@@ -15,8 +15,8 @@ export function PerfilPageHandler({
   console.log(profileInfos);
   return (
     <div className="min-h-screen bg-surface/50 flex font-sans selection:bg-blue-primary/30">
-      <main className="flex-1 pl-20 pr-8 pb-12 relative">
-        <div className="mt-20 px-20 relative z-10">
+      <main className="flex-1 pl-10 pr-4 lg:pl-20 lg:pr-8 pb-12 relative">
+        <div className="mt-20 lg:px-20 relative z-10">
           <ProfileHeader profileInfos={profileInfos.userInfos} />
 
           <div className="mt-24 flex flex-col gap-12">
