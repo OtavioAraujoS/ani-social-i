@@ -39,7 +39,7 @@ export function PagesFilter({
   return (
     <div className="flex flex-col xl:flex-row items-center justify-between glass-panel rounded-3xl xl:rounded-full px-6 py-6 xl:py-3 mb-8 gap-5 border border-black/10 dark:border-white/20 relative z-10 w-full">
       <div className="flex flex-wrap items-center justify-center xl:justify-start gap-4 md:gap-6 w-full xl:w-auto">
-        <span className="cursor-pointer text-on-surface dark:text-on-surface-dark font-bold uppercase text-[10px] tracking-widest whitespace-nowrap">
+        <span className="text-on-surface dark:text-on-surface-dark font-bold uppercase text-[10px] tracking-widest whitespace-nowrap">
           Ordenar por:
         </span>
         <div className="flex flex-wrap items-center justify-center gap-4">

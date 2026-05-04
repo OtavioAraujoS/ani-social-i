@@ -12,7 +12,7 @@ export function ProfileTopicsSection({
           Tópicos <span className="text-blue-primary">Criados</span>
         </h2>
       </div>
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid gap-4">
         {topicsInfos.map((topic) => (
           <div
             key={`${topic.title}_${topic.createdAt}`}
