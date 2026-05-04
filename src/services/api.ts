@@ -340,7 +340,14 @@ export interface UserProfileResponse {
     content: string;
     createdAt: date | string | number;
     updatedAt: date | string | number;
+    comments: number;
   }[];
+  userInfos: {
+    id: string;
+    username: string;
+    name: string;
+    avatarUrl: string | null;
+  };
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -379,8 +386,10 @@ export interface ApiConfig<SecurityDataType = unknown> {
   customFetch?: typeof fetch;
 }
 
-export interface HttpResponse<D extends unknown, E extends unknown = unknown>
-  extends Response {
+export interface HttpResponse<
+  D extends unknown,
+  E extends unknown = unknown,
+> extends Response {
   data: D;
   error: E;
 }
