@@ -347,6 +347,7 @@ export interface UserProfileResponse {
     username: string;
     name: string;
     avatarUrl: string | null;
+    rank: "S" | "A" | "B" | "C" | "D";
   };
 }
 
