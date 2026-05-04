@@ -28,7 +28,7 @@ export default async function CollectionsPage({
 
   const getCollectionsResult = async () => {
     try {
-      const response = await apiClient.social.getSocialAnimes({
+      const response = await apiClient.animes.getAnimesAnimes({
         page,
         limit,
         title,

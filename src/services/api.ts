@@ -79,6 +79,80 @@ export type UserListResponse = {
   updatedAt: date | string | number;
 }[];
 
+export interface DashboardResponse {
+  recentAnimes: ({
+    id: string;
+    title: string;
+    description: string;
+    episodes: number;
+    review: string | null;
+    stars: number | null;
+    imageUrl: string | null;
+    status: "COMPLETED" | "RELEASING" | "PENDING";
+    createdAt: date | string | number;
+    updatedAt: date | string | number;
+  } & {
+    createdByUser: {
+      name: string;
+      userName: string;
+      rank: "S" | "A" | "B" | "C" | "D";
+      avatarUrl: string | null;
+    } | null;
+    updatedByUser: {
+      name: string;
+      userName: string;
+      rank: "S" | "A" | "B" | "C" | "D";
+      avatarUrl: string | null;
+    } | null;
+  })[];
+  recentTopics: {
+    id: string;
+    title: string;
+    description: string;
+    animeId: string;
+    comments: number;
+    createdByUser: {
+      name: string;
+      userName: string;
+      rank: "S" | "A" | "B" | "C" | "D";
+      avatarUrl: string | null;
+    } | null;
+    updatedByUser: {
+      name: string;
+      userName: string;
+      rank: "S" | "A" | "B" | "C" | "D";
+      avatarUrl: string | null;
+    } | null;
+    createdAt: date | string | number;
+    updatedAt: date | string | number;
+  }[];
+  releasingAnimes: ({
+    id: string;
+    title: string;
+    description: string;
+    episodes: number;
+    review: string | null;
+    stars: number | null;
+    imageUrl: string | null;
+    status: "COMPLETED" | "RELEASING" | "PENDING";
+    createdAt: date | string | number;
+    updatedAt: date | string | number;
+  } & {
+    createdByUser: {
+      name: string;
+      userName: string;
+      rank: "S" | "A" | "B" | "C" | "D";
+      avatarUrl: string | null;
+    } | null;
+    updatedByUser: {
+      name: string;
+      userName: string;
+      rank: "S" | "A" | "B" | "C" | "D";
+      avatarUrl: string | null;
+    } | null;
+  })[];
+}
+
 export interface AnimeListResponse {
   data: {
     id: string;
@@ -244,78 +318,29 @@ export interface DeleteComment {
   topicId: string;
 }
 
-export interface DashboardResponse {
-  recentAnimes: ({
+export interface UserProfileResponse {
+  anime: {
     id: string;
     title: string;
-    description: string;
     episodes: number;
-    review: string | null;
-    stars: number | null;
-    imageUrl: string | null;
-    status: "COMPLETED" | "RELEASING" | "PENDING";
+    status: string;
     createdAt: date | string | number;
     updatedAt: date | string | number;
-  } & {
-    createdByUser: {
-      name: string;
-      userName: string;
-      rank: "S" | "A" | "B" | "C" | "D";
-      avatarUrl: string | null;
-    } | null;
-    updatedByUser: {
-      name: string;
-      userName: string;
-      rank: "S" | "A" | "B" | "C" | "D";
-      avatarUrl: string | null;
-    } | null;
-  })[];
-  recentTopics: {
+    cover: string | null;
+  }[];
+  topics: {
     id: string;
     title: string;
-    description: string;
-    animeId: string;
-    comments: number;
-    createdByUser: {
-      name: string;
-      userName: string;
-      rank: "S" | "A" | "B" | "C" | "D";
-      avatarUrl: string | null;
-    } | null;
-    updatedByUser: {
-      name: string;
-      userName: string;
-      rank: "S" | "A" | "B" | "C" | "D";
-      avatarUrl: string | null;
-    } | null;
+    content: string;
     createdAt: date | string | number;
     updatedAt: date | string | number;
   }[];
-  releasingAnimes: ({
+  comments: {
     id: string;
-    title: string;
-    description: string;
-    episodes: number;
-    review: string | null;
-    stars: number | null;
-    imageUrl: string | null;
-    status: "COMPLETED" | "RELEASING" | "PENDING";
+    content: string;
     createdAt: date | string | number;
     updatedAt: date | string | number;
-  } & {
-    createdByUser: {
-      name: string;
-      userName: string;
-      rank: "S" | "A" | "B" | "C" | "D";
-      avatarUrl: string | null;
-    } | null;
-    updatedByUser: {
-      name: string;
-      userName: string;
-      rank: "S" | "A" | "B" | "C" | "D";
-      avatarUrl: string | null;
-    } | null;
-  })[];
+  }[];
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -738,14 +763,29 @@ export class Api<
         ...params,
       }),
   };
-  social = {
+  dashboard = {
     /**
      * No description
      *
-     * @name GetSocialAnimes
-     * @request GET:/social/animes/
+     * @name GetDashboard
+     * @request GET:/dashboard/
      */
-    getSocialAnimes: (
+    getDashboard: (params: RequestParams = {}) =>
+      this.request<DashboardResponse, any>({
+        path: `/dashboard/`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+  };
+  animes = {
+    /**
+     * No description
+     *
+     * @name GetAnimesAnimes
+     * @request GET:/animes/animes/
+     */
+    getAnimesAnimes: (
       query?: {
         page?: number;
         limit?: number;
@@ -757,7 +797,7 @@ export class Api<
       params: RequestParams = {},
     ) =>
       this.request<AnimeListResponse, any>({
-        path: `/social/animes/`,
+        path: `/animes/animes/`,
         method: "GET",
         query: query,
         format: "json",
@@ -767,12 +807,12 @@ export class Api<
     /**
      * No description
      *
-     * @name PostSocialAnimes
-     * @request POST:/social/animes/
+     * @name PostAnimesAnimes
+     * @request POST:/animes/animes/
      */
-    postSocialAnimes: (data: CreateAnime, params: RequestParams = {}) =>
+    postAnimesAnimes: (data: CreateAnime, params: RequestParams = {}) =>
       this.request<SuccessResponse, any>({
-        path: `/social/animes/`,
+        path: `/animes/animes/`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -783,12 +823,12 @@ export class Api<
     /**
      * No description
      *
-     * @name PatchSocialAnimes
-     * @request PATCH:/social/animes/
+     * @name PatchAnimesAnimes
+     * @request PATCH:/animes/animes/
      */
-    patchSocialAnimes: (data: UpdateAnime, params: RequestParams = {}) =>
+    patchAnimesAnimes: (data: UpdateAnime, params: RequestParams = {}) =>
       this.request<SuccessResponse, any>({
-        path: `/social/animes/`,
+        path: `/animes/animes/`,
         method: "PATCH",
         body: data,
         type: ContentType.Json,
@@ -799,12 +839,12 @@ export class Api<
     /**
      * No description
      *
-     * @name GetSocialAnimesByAnimeId
-     * @request GET:/social/animes/{animeId}
+     * @name GetAnimesAnimesByAnimeId
+     * @request GET:/animes/animes/{animeId}
      */
-    getSocialAnimesByAnimeId: (animeId: string, params: RequestParams = {}) =>
+    getAnimesAnimesByAnimeId: (animeId: string, params: RequestParams = {}) =>
       this.request<AnimeDetailResponse, any>({
-        path: `/social/animes/${animeId}`,
+        path: `/animes/animes/${animeId}`,
         method: "GET",
         format: "json",
         ...params,
@@ -813,15 +853,15 @@ export class Api<
     /**
      * No description
      *
-     * @name DeleteSocialAnimesByAnimeId
-     * @request DELETE:/social/animes/{animeId}
+     * @name DeleteAnimesAnimesByAnimeId
+     * @request DELETE:/animes/animes/{animeId}
      */
-    deleteSocialAnimesByAnimeId: (
+    deleteAnimesAnimesByAnimeId: (
       animeId: string,
       params: RequestParams = {},
     ) =>
       this.request<SuccessResponse, any>({
-        path: `/social/animes/${animeId}`,
+        path: `/animes/animes/${animeId}`,
         method: "DELETE",
         format: "json",
         ...params,
@@ -830,29 +870,30 @@ export class Api<
     /**
      * No description
      *
-     * @name PatchSocialAnimesImage
-     * @request PATCH:/social/animes/image
+     * @name PatchAnimesAnimesImage
+     * @request PATCH:/animes/animes/image
      */
-    patchSocialAnimesImage: (
+    patchAnimesAnimesImage: (
       data: UpdateAnimeImage,
       params: RequestParams = {},
     ) =>
       this.request<SuccessResponse, any>({
-        path: `/social/animes/image`,
+        path: `/animes/animes/image`,
         method: "PATCH",
         body: data,
         type: ContentType.Json,
         format: "json",
         ...params,
       }),
-
+  };
+  topics = {
     /**
      * No description
      *
-     * @name GetSocialTopics
-     * @request GET:/social/topics/
+     * @name GetTopicsTopics
+     * @request GET:/topics/topics/
      */
-    getSocialTopics: (
+    getTopicsTopics: (
       query?: {
         /** @default 1 */
         page?: string | number;
@@ -868,7 +909,7 @@ export class Api<
       params: RequestParams = {},
     ) =>
       this.request<ListTopics, any>({
-        path: `/social/topics/`,
+        path: `/topics/topics/`,
         method: "GET",
         query: query,
         format: "json",
@@ -878,12 +919,12 @@ export class Api<
     /**
      * No description
      *
-     * @name PostSocialTopics
-     * @request POST:/social/topics/
+     * @name PostTopicsTopics
+     * @request POST:/topics/topics/
      */
-    postSocialTopics: (data: CreateTopic, params: RequestParams = {}) =>
+    postTopicsTopics: (data: CreateTopic, params: RequestParams = {}) =>
       this.request<SuccessResponse, any>({
-        path: `/social/topics/`,
+        path: `/topics/topics/`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -894,12 +935,12 @@ export class Api<
     /**
      * No description
      *
-     * @name GetSocialTopicsByTopicId
-     * @request GET:/social/topics/{topicId}
+     * @name GetTopicsTopicsByTopicId
+     * @request GET:/topics/topics/{topicId}
      */
-    getSocialTopicsByTopicId: (topicId: string, params: RequestParams = {}) =>
+    getTopicsTopicsByTopicId: (topicId: string, params: RequestParams = {}) =>
       this.request<TopicResponse, any>({
-        path: `/social/topics/${topicId}`,
+        path: `/topics/topics/${topicId}`,
         method: "GET",
         format: "json",
         ...params,
@@ -908,16 +949,16 @@ export class Api<
     /**
      * No description
      *
-     * @name PatchSocialTopicsByTopicId
-     * @request PATCH:/social/topics/{topicId}
+     * @name PatchTopicsTopicsByTopicId
+     * @request PATCH:/topics/topics/{topicId}
      */
-    patchSocialTopicsByTopicId: (
+    patchTopicsTopicsByTopicId: (
       topicId: string,
       data: UpdateTopic,
       params: RequestParams = {},
     ) =>
       this.request<SuccessResponse, any>({
-        path: `/social/topics/${topicId}`,
+        path: `/topics/topics/${topicId}`,
         method: "PATCH",
         body: data,
         type: ContentType.Json,
@@ -928,27 +969,28 @@ export class Api<
     /**
      * No description
      *
-     * @name DeleteSocialTopicsByTopicId
-     * @request DELETE:/social/topics/{topicId}
+     * @name DeleteTopicsTopicsByTopicId
+     * @request DELETE:/topics/topics/{topicId}
      */
-    deleteSocialTopicsByTopicId: (
+    deleteTopicsTopicsByTopicId: (
       topicId: string,
       params: RequestParams = {},
     ) =>
       this.request<SuccessResponse, any>({
-        path: `/social/topics/${topicId}`,
+        path: `/topics/topics/${topicId}`,
         method: "DELETE",
         format: "json",
         ...params,
       }),
-
+  };
+  comments = {
     /**
      * No description
      *
-     * @name GetSocialCommentsByTopicId
-     * @request GET:/social/comments/{topicId}
+     * @name GetCommentsCommentsByTopicId
+     * @request GET:/comments/comments/{topicId}
      */
-    getSocialCommentsByTopicId: (
+    getCommentsCommentsByTopicId: (
       topicId: string,
       query?: {
         /** @default 1 */
@@ -959,7 +1001,7 @@ export class Api<
       params: RequestParams = {},
     ) =>
       this.request<CommentList, any>({
-        path: `/social/comments/${topicId}`,
+        path: `/comments/comments/${topicId}`,
         method: "GET",
         query: query,
         format: "json",
@@ -969,12 +1011,12 @@ export class Api<
     /**
      * No description
      *
-     * @name PostSocialComments
-     * @request POST:/social/comments/
+     * @name PostCommentsComments
+     * @request POST:/comments/comments/
      */
-    postSocialComments: (data: CreateComment, params: RequestParams = {}) =>
+    postCommentsComments: (data: CreateComment, params: RequestParams = {}) =>
       this.request<SuccessResponse, any>({
-        path: `/social/comments/`,
+        path: `/comments/comments/`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -985,12 +1027,12 @@ export class Api<
     /**
      * No description
      *
-     * @name PatchSocialComments
-     * @request PATCH:/social/comments/
+     * @name PatchCommentsComments
+     * @request PATCH:/comments/comments/
      */
-    patchSocialComments: (data: UpdateComment, params: RequestParams = {}) =>
+    patchCommentsComments: (data: UpdateComment, params: RequestParams = {}) =>
       this.request<SuccessResponse, any>({
-        path: `/social/comments/`,
+        path: `/comments/comments/`,
         method: "PATCH",
         body: data,
         type: ContentType.Json,
@@ -1001,12 +1043,12 @@ export class Api<
     /**
      * No description
      *
-     * @name DeleteSocialComments
-     * @request DELETE:/social/comments/
+     * @name DeleteCommentsComments
+     * @request DELETE:/comments/comments/
      */
-    deleteSocialComments: (data: DeleteComment, params: RequestParams = {}) =>
+    deleteCommentsComments: (data: DeleteComment, params: RequestParams = {}) =>
       this.request<SuccessResponse, any>({
-        path: `/social/comments/`,
+        path: `/comments/comments/`,
         method: "DELETE",
         body: data,
         type: ContentType.Json,
@@ -1014,16 +1056,16 @@ export class Api<
         ...params,
       }),
   };
-  dashboard = {
+  profile = {
     /**
      * No description
      *
-     * @name GetDashboard
-     * @request GET:/dashboard/
+     * @name GetProfileByUserId
+     * @request GET:/profile/{userId}
      */
-    getDashboard: (params: RequestParams = {}) =>
-      this.request<DashboardResponse, any>({
-        path: `/dashboard/`,
+    getProfileByUserId: (userId: string, params: RequestParams = {}) =>
+      this.request<UserProfileResponse, any>({
+        path: `/profile/${userId}`,
         method: "GET",
         format: "json",
         ...params,

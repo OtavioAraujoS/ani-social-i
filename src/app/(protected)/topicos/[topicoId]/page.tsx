@@ -18,7 +18,7 @@ export default async function IndividualTopicPage({
   const getTopicDetails = async () => {
     try {
       const response =
-        await apiClient.social.getSocialTopicsByTopicId(topicoId);
+        await apiClient.topics.getTopicsTopicsByTopicId(topicoId);
       return { data: response.data, isError: false as const };
     } catch (error) {
       const apiError = getApiError(error);
@@ -37,7 +37,7 @@ export default async function IndividualTopicPage({
   const getComments = async () => {
     try {
       const response =
-        await apiClient.social.getSocialCommentsByTopicId(topicoId);
+        await apiClient.comments.getCommentsCommentsByTopicId(topicoId);
       return { data: response.data || [], isError: false as const };
     } catch (error) {
       const apiError = getApiError(error);

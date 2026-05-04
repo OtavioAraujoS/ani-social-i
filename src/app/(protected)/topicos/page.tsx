@@ -33,7 +33,7 @@ export default async function TopicsPage({
 
   const getTopicsResult = async () => {
     try {
-      const response = await apiClient.social.getSocialTopics({
+      const response = await apiClient.topics.getTopicsTopics({
         page,
         limit,
         title: searchtitle,
@@ -56,7 +56,7 @@ export default async function TopicsPage({
 
   const getAnimeResult = async () => {
     try {
-      const response = await apiClient.social.getSocialAnimes();
+      const response = await apiClient.animes.getAnimesAnimes();
       return { data: response.data.data || [], isError: false as const };
     } catch (error) {
       const apiError = getApiError(error);

@@ -40,7 +40,7 @@ export function TopicForm({
     try {
       if (!topicId) return;
       const response =
-        await apiClient.social.deleteSocialTopicsByTopicId(topicId);
+        await apiClient.topics.deleteTopicsTopicsByTopicId(topicId);
       if (response.data.success) {
         toast.success("Tópico removido com sucesso!");
         await LoadingAndRefresh(router);
@@ -61,7 +61,7 @@ export function TopicForm({
     setIsLoading(true);
     try {
       if (isEditing && topicId) {
-        const response = await apiClient.social.patchSocialTopicsByTopicId(
+        const response = await apiClient.topics.patchTopicsTopicsByTopicId(
           topicId,
           {
             ...data,
@@ -78,7 +78,7 @@ export function TopicForm({
         }
       }
 
-      const response = await apiClient.social.postSocialTopics(
+      const response = await apiClient.topics.postTopicsTopics(
         data as CreateTopic,
       );
       if (response.data.success) {
