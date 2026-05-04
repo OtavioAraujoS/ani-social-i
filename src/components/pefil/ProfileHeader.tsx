@@ -5,8 +5,10 @@ import Image from "next/image";
 
 export function ProfileHeader({
   profileInfos,
+  userIsOwner,
 }: {
   profileInfos: IProfileUserInfos;
+  userIsOwner: boolean;
 }) {
   return (
     <div className="flex flex-wrap justify-between gap-6">
@@ -44,9 +46,11 @@ export function ProfileHeader({
         </div>
       </div>
 
-      <button className="w-fit max-h-32 self-center cursor-pointer text-white bg-blue-primary hover:bg-blue-accent dark:bg-blue-accent dark:hover:bg-blue-primary px-8 py-3 glass-panel transition-all font-bold tracking-widest text-[10px] inner-glow">
-        EDITAR PERFIL
-      </button>
+      {userIsOwner && (
+        <button className="w-full lg:w-fit max-h-32 self-center cursor-pointer text-white bg-blue-primary hover:bg-blue-accent dark:bg-blue-accent dark:hover:bg-blue-primary px-8 py-3 glass-panel transition-all font-bold tracking-widest text-[10px] inner-glow">
+          EDITAR PERFIL
+        </button>
+      )}
     </div>
   );
 }

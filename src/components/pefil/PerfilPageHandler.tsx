@@ -6,18 +6,25 @@ import { ProfileTopicsSection } from "./ProfileTopicsSection";
 import { ProfileHeader } from "./ProfileHeader";
 import dayjs from "dayjs";
 import { StatusMap, statusMap } from "@/utils/StatusMap";
+import { useAuth } from "@/providers/AuthProvider";
 
 export function PerfilPageHandler({
   profileInfos,
 }: {
   profileInfos: UserProfileResponse;
 }) {
-  console.log(profileInfos);
+  const { user } = useAuth();
+  const isOwner =
+    user?.userId === profileInfos.userInfos.id || user?.role === "ADMIN";
+
   return (
     <div className="min-h-screen bg-surface/50 flex font-sans selection:bg-blue-primary/30">
       <main className="flex-1 pl-10 pr-4 lg:pl-20 lg:pr-8 pb-12 relative">
         <div className="mt-20 lg:px-20 relative z-10">
-          <ProfileHeader profileInfos={profileInfos.userInfos} />
+          <ProfileHeader
+            profileInfos={profileInfos.userInfos}
+            userIsOwner={isOwner}
+          />
 
           <div className="mt-24 flex flex-col gap-12">
             <div className="flex flex-col gap-12">
