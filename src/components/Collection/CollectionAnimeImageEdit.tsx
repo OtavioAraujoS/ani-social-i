@@ -61,7 +61,7 @@ export function CollectionAnimeImageEdit({
   const onSubmit = async (data: UpdateImageSchema) => {
     try {
       setIsLoading?.(true);
-      await apiClient.social.patchSocialAnimesImage({
+      await apiClient.animes.patchAnimesAnimesImage({
         animeId: anime.id,
         imageUrl: data.imageUrl,
       });

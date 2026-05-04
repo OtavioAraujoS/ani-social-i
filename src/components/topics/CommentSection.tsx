@@ -25,7 +25,7 @@ export const CommentSection = ({ comments, topicId }: CommentSectionProps) => {
   const handleSubmitComment = async (commentId: string) => {
     setLoading(true);
     try {
-      const response = await apiClient.social.deleteSocialComments({
+      const response = await apiClient.comments.deleteCommentsComments({
         commentId,
         topicId,
       });

@@ -2,6 +2,7 @@ import { CollectionPageHandler } from "@/components/Collection/CollectionPageHan
 import { PageError } from "@/components/PageError";
 import { apiClient, getApiError } from "@/services/apiClient";
 import { handleUnauthorizedServer } from "@/services/authUtils";
+import { statusParamMap } from "@/utils/StatusMap";
 
 export const metadata = {
   title: "Coleções - AniSocial",
@@ -18,21 +19,18 @@ export default async function CollectionsPage({
   const page = Number(params?.page) || 1;
   const title = typeof params?.title === "string" ? params.title : undefined;
   const limit = 10;
-  const statusMap: Record<string, "COMPLETED" | "RELEASING" | "PENDING"> = {
-    concluidos: "COMPLETED",
-    assistindo: "RELEASING",
-    pendente: "PENDING",
-  };
-  const status =
-    typeof params?.status === "string" ? statusMap[params.status] : undefined;
+  const statusKey =
+    typeof params?.status === "string"
+      ? statusParamMap[params.status as keyof typeof statusParamMap]
+      : undefined;
 
   const getCollectionsResult = async () => {
     try {
-      const response = await apiClient.social.getSocialAnimes({
+      const response = await apiClient.animes.getAnimesAnimes({
         page,
         limit,
         title,
-        status,
+        status: statusKey,
       });
       return { data: response.data, isError: false as const };
     } catch (error) {

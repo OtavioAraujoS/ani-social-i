@@ -38,7 +38,7 @@ export function CollectionForm({
     setIsLoading(true);
     try {
       if (!initialData?.id) return;
-      const response = await apiClient.social.deleteSocialAnimesByAnimeId(
+      const response = await apiClient.animes.deleteAnimesAnimesByAnimeId(
         initialData?.id,
       );
       if (response.data.success) {
@@ -61,7 +61,7 @@ export function CollectionForm({
     setIsLoading(true);
     try {
       if (isEditing && initialData?.id) {
-        const response = await apiClient.social.patchSocialAnimes({
+        const response = await apiClient.animes.patchAnimesAnimes({
           animeId: initialData.id,
           title: data.title,
           description: data.description,
@@ -79,7 +79,7 @@ export function CollectionForm({
           LoadingAndRefresh(router);
         }
       } else {
-        const response = await apiClient.social.postSocialAnimes(
+        const response = await apiClient.animes.postAnimesAnimes(
           data as CreateAnime,
         );
         if (response.data.success) {

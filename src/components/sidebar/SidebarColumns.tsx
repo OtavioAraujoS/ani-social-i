@@ -6,3 +6,12 @@ export const mainNav = [
   { title: "Tópicos", href: "/topicos", icon: Library },
   { title: "Perfil", href: "/perfil", icon: User },
 ];
+
+export function MainNav(userId: string) {
+  return mainNav.map((item) => {
+    return {
+      ...item,
+      href: item.href === "/perfil" ? `${item.href}/${userId}` : item.href,
+    };
+  });
+}

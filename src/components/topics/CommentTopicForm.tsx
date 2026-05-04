@@ -19,7 +19,7 @@ export function CommentTopicForm({ topicId }: { topicId: string }) {
   const handleSubmitComment = async () => {
     setLoading(true);
     try {
-      const response = await apiClient.social.postSocialComments({
+      const response = await apiClient.comments.postCommentsComments({
         content: comment,
         topicId,
       });
