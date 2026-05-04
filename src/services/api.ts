@@ -334,13 +334,13 @@ export interface UserProfileResponse {
     content: string;
     createdAt: date | string | number;
     updatedAt: date | string | number;
+    comments: number;
   }[];
   comments: {
     id: string;
     content: string;
     createdAt: date | string | number;
     updatedAt: date | string | number;
-    comments: number;
   }[];
   userInfos: {
     id: string;
