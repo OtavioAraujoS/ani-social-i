@@ -1,4 +1,5 @@
 import { IProfileTopics } from "@/interfaces/IProfile";
+import Link from "next/link";
 
 export function ProfileTopicsSection({
   topicsInfos,
@@ -7,24 +8,20 @@ export function ProfileTopicsSection({
 }) {
   return (
     <section>
-      <div className="flex items-center justify-between mb-8">
+      <div className="mb-8">
         <h2 className="text-3xl font-black italic">
           Tópicos <span className="text-blue-primary">Criados</span>
         </h2>
       </div>
-      <div className="grid gap-4">
+      <div className="flex gap-4">
         {topicsInfos.map((topic) => (
-          <div
+          <Link
+            href={`/topicos/${topic.id}`}
             key={`${topic.title}_${topic.createdAt}`}
-            className="glass-panel p-6 hover:bg-white/5 cursor-pointer transition-all border-l-2 border-l-transparent hover:border-l-blue-primary"
+            className="glass-panel pt-4 pb-1 px-6 hover:bg-white/5 cursor-pointer transition-all border-l-2 border-l-transparent hover:border-l-blue-primary"
           >
             <h4 className="text-base font-bold mb-3">{topic.title}</h4>
-            <div className="flex justify-between items-center">
-              <span className="sanctuary-label text-[10px]">
-                {topic.comments} Respostas
-              </span>
-            </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
