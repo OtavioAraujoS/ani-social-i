@@ -1,3 +1,4 @@
+"use client";
 import {
   SidebarContent as SidebarContentUI,
   SidebarGroup,
@@ -5,18 +6,21 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { mainNav } from "./SidebarColumns";
+import { MainNav } from "./SidebarColumns";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/providers/AuthProvider";
 
 export function SidebarContent() {
+  const { user } = useAuth();
   const pathname = usePathname();
+
   return (
     <SidebarContentUI className="px-2 pt-2 group-data-[collapsible=icon]:px-0">
       <SidebarGroup className="group-data-[collapsible=icon]:p-0">
         <SidebarMenu>
-          {mainNav.map((item) => {
+          {MainNav(user?.userId ?? "").map((item) => {
             const isActive =
               pathname === item.href || pathname.startsWith(item.href + "/");
             return (
