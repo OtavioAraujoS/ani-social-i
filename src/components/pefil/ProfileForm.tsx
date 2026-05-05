@@ -80,15 +80,15 @@ export function ProfileForm({
     }
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
-        <ProfilePictureField
-          currentAvatar={initialData?.avatarUrl}
-          isLoading={isLoading}
-          onSubmit={changeUserPicture}
-        />
+    <div className="grid grid-cols-1 lg:grid-cols-[4fr_6fr] gap-8 w-full items-stretch">
+      <ProfilePictureField
+        currentAvatar={initialData?.avatarUrl}
+        isLoading={isLoading}
+        onSubmit={changeUserPicture}
+      />
+      <form onSubmit={handleSubmit(onSubmit)} className="h-full">
         <ProfileFields form={form} isLoading={isLoading} />
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }

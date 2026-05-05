@@ -16,9 +16,13 @@ export function ProfileFields({ form, isLoading }: ProfileFieldsProps) {
     formState: { errors },
   } = form;
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-      <div className="flex flex-col gap-5">
-        <div className="flex flex-col gap-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="h-full w-full"
+    >
+      <div className="flex flex-col h-full">
+        <div className="flex flex-col gap-12">
           <div>
             <Label className="sanctuary-label block mb-2 dark:text-slate-200">
               Nome
@@ -55,7 +59,7 @@ export function ProfileFields({ form, isLoading }: ProfileFieldsProps) {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-5 justify-end mt-5">
+        <div className="flex flex-wrap gap-5 justify-end mt-auto pt-6">
           <DialogButtons
             isLoading={isLoading}
             saveButtonTitle="Salvar"
