@@ -5,4 +5,10 @@ export interface ICreatedByUser {
   avatarUrl: string | null;
 }
 
+export interface IUpdateUser {
+  userId: string;
+  name: string;
+  userName: string;
+}
+
 export type IUpdatedByUser = ICreatedByUser;
