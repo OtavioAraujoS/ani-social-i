@@ -2,6 +2,7 @@ import { rankTitles } from "@/app/(protected)/dashboard/rankTitles";
 import { IProfileUserInfos } from "@/interfaces/IProfile";
 import { Library } from "lucide-react";
 import Image from "next/image";
+import { ProfileDialog } from "./ProfileDialog";
 
 export function ProfileHeader({
   profileInfos,
@@ -46,11 +47,7 @@ export function ProfileHeader({
         </div>
       </div>
 
-      {userIsOwner && (
-        <button className="w-full lg:w-fit max-h-32 self-center cursor-pointer text-white bg-blue-primary hover:bg-blue-accent dark:bg-blue-accent dark:hover:bg-blue-primary px-8 py-3 glass-panel transition-all font-bold tracking-widest text-[10px] inner-glow">
-          EDITAR PERFIL
-        </button>
-      )}
+      {userIsOwner && <ProfileDialog profileInfos={profileInfos} />}
     </div>
   );
 }

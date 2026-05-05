@@ -9,6 +9,7 @@ export interface IUpdateUser {
   userId: string;
   name: string;
   userName: string;
+  avatarUrl?: string | null;
 }
 
 export type IUpdatedByUser = ICreatedByUser;

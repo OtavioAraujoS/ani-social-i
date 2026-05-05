@@ -12,14 +12,14 @@ export function DialogButtons({
   isEditing?: boolean;
   isLoading?: boolean;
   functionButton?: () => void;
-  deleteButtonTitle: string;
-  deleteButtonIcon: React.ReactNode;
+  deleteButtonTitle?: string;
+  deleteButtonIcon?: React.ReactNode;
   saveButtonTitle: string;
   saveButtonIcon: React.ReactNode;
 }) {
   return (
     <div className="flex flex-wrap gap-5 justify-end mt-5">
-      {isEditing && (
+      {isEditing && deleteButtonTitle && deleteButtonIcon && functionButton && (
         <button
           type="button"
           disabled={isLoading}
