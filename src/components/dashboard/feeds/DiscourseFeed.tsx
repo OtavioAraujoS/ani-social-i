@@ -17,11 +17,7 @@ export function DiscourseFeed({ topics }: DiscourseFeedProps) {
             Tópicos Recentes
           </h2>
         </div>
-        <NeonButtonRedirect
-          href="/dashboard/topicos/criar"
-          text="Criar Tópico"
-          color="cyan"
-        />
+        <NeonButtonRedirect href="/topicos" text="Ver Tópicos" color="cyan" />
       </div>
 
       <div className="grid grid-cols-1 gap-6">
