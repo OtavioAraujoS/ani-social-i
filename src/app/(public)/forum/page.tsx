@@ -2,6 +2,7 @@ import { FeatureCard } from "@/components/FeatureCard";
 import Image from "next/image";
 import { ThreeColumnLayout } from "@/components/ThreeColumnLayout";
 import { forumFeatures } from "@/utils/projectFunctions";
+import { HeaderHome } from "@/components/HeaderHome";
 
 export const metadata = {
   title: "Fórum - AniSocial",
@@ -10,27 +11,14 @@ export const metadata = {
 
 export default function ForumHomePage() {
   const leftContent = (
-    <>
-      <div className="space-y-2">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-slate-900 dark:text-[#00F0FF] leading-none md:leading-[0.9] uppercase tracking-tighter italic">
-          COLISÃO DE
-          <br />
-          IDEIAS
-        </h1>
-        <div className="flex items-center gap-3 pt-2">
-          <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#0080FF] dark:text-[#00F0FF] dark:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]">
-            DISCOURSE PROTOCOL // ANI SOCIAL
-          </div>
-        </div>
-        <div className="h-0.5 w-full max-w-50 mt-2 bg-linear-to-r from-[#0080FF] dark:from-[#00F0FF] to-transparent opacity-60"></div>
-      </div>
-
-      <p className="max-w-md text-sm font-medium leading-relaxed text-slate-700 dark:text-white/60">
-        Onde as discussões ganham vida e as ideias se conectam. O epicentro da
+    <HeaderHome
+      title="NEURAL LINK // ANI SOCIAL"
+      subtitle="COLISÃO"
+      subtitleFunction="DE IDEIAS"
+      description="        Onde as discussões ganham vida e as ideias se conectam. O epicentro da
         comunidade Otaku. Um espaço vibrante onde fãs se reúnem para celebrar
-        sua paixão compartilhada por animes.
-      </p>
-    </>
+        sua paixão compartilhada por animes."
+    />
   );
 
   const centerContent = (

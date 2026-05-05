@@ -2,6 +2,7 @@ import { FeatureCard } from "@/components/FeatureCard";
 import { projectFeatures } from "@/utils/projectFunctions";
 import Image from "next/image";
 import { ThreeColumnLayout } from "@/components/ThreeColumnLayout";
+import { HeaderHome } from "@/components/HeaderHome";
 
 export const metadata = {
   title: "Home - AniSocial",
@@ -10,23 +11,12 @@ export const metadata = {
 
 export default function Home() {
   const leftContent = (
-    <>
-      <div className="space-y-1 md:space-y-2">
-        <div className="text-slate-500 dark:text-[#00F0FF] text-[9px] md:text-[10px] font-mono tracking-[0.4em] md:tracking-[0.5em] uppercase font-bold dark:font-normal opacity-80 dark:opacity-70">
-          NEURAL LINK // ANI SOCIAL
-        </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-slate-900 dark:text-[#00F0FF] leading-none md:leading-[0.9] uppercase tracking-tighter italic">
-          Hub
-          <br />
-          Social de Animes
-        </h1>
-      </div>
-
-      <p className="text-sm md:text-base lg:text-lg text-slate-700 dark:text-white/50 leading-relaxed font-medium dark:font-light max-w-xl mx-auto lg:mx-0">
-        Acesse o repositório central da cultura otaku. Sincronize metadados,
-        forje conexões na rede e domine o fluxo de informações do ecossistema.
-      </p>
-    </>
+    <HeaderHome
+      title="NEURAL LINK // ANI SOCIAL"
+      subtitle="Hub"
+      subtitleFunction="Social de Animes"
+      description="Acesse o repositório central da cultura otaku. Sincronize metadados, forje conexões na rede e domine o fluxo de informações do ecossistema."
+    />
   );
 
   const centerContent = (
