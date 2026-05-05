@@ -33,7 +33,10 @@ export const AnimeCard = ({
       {index}
     </div>
     <div className="absolute bottom-6 left-6 right-6">
-      <h3 className="font-bold text-xl leading-tight mb-1 text-cyan-200">
+      <h3
+        className="font-bold text-xl leading-tight mb-1 text-cyan-200 line-clamp-2"
+        title={title}
+      >
         {title}
       </h3>
       <p className="sanctuary-label text-blue-accent">{status}</p>

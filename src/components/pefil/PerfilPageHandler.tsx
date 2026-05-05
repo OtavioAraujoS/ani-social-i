@@ -36,7 +36,7 @@ export function PerfilPageHandler({
                   </h2>
                 </div>
                 <div className="flex flex-wrap gap-6">
-                  {profileInfos.anime.map((anime, index) => (
+                  {profileInfos.anime.slice(0, 10).map((anime, index) => (
                     <AnimeCard
                       key={anime.id}
                       title={anime.title}
