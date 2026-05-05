@@ -11,10 +11,10 @@ export function ResidentItem({ anime }: ResidentItemProps) {
   return (
     <div className="group flex items-center gap-3 p-2 rounded-md transition-colors hover:bg-surface-container dark:hover:bg-white/5">
       <div className="relative">
-        {anime.updatedByUser?.avatarUrl ? (
+        {anime?.createdByUser?.avatarUrl ? (
           <Image
-            src={anime?.updatedByUser?.avatarUrl}
-            alt={anime?.updatedByUser?.name}
+            src={anime?.createdByUser?.avatarUrl}
+            alt={anime?.createdByUser?.name}
             width={56}
             height={56}
             unoptimized
